@@ -20,10 +20,6 @@ const menus = [
         header: '',
         menus: [
           {
-            link: { type: 'a', url: '#' },
-            title: 'Perfis de Acesso',
-          },
-          {
             link: { type: 'link', url: '/parametrizacao/monthlyhours' },
             title: 'Quantidade Horas Mês',
           },
@@ -32,7 +28,7 @@ const menus = [
             title: 'Perfis de Venda',
           },
           {
-            link: { type: 'a', url: '#' },
+            link: { type: 'link', url: '/parametrizacao/roles' },
             title: 'Cargos',
           },
         ],

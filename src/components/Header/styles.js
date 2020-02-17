@@ -2,13 +2,10 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 
 export const Container = styled.div`
-  padding: 10px 30px;
+  height: 60px;
+  padding: 5px 30px;
+  /* padding-top: 5px; */
   background: #222239;
-
-  @media only screen and (max-width: 880px) {
-    margin-left: 0;
-    margin-right: 0;
-  }
 `
 
 export const Content = styled.div`

@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { ToastContainer } from 'react-toastify'
 import Routes from './routes'
 import history from './services/history'
+import './config/Axios'
 
 import { store, persistor } from './store'
 
@@ -21,7 +22,7 @@ function App() {
         <Router history={history}>
           <Routes />
           <GlobalStyle />
-          <ToastContainer autoClose={3000} />
+          <ToastContainer autoClose={5000} />
         </Router>
       </PersistGate>
     </Provider>

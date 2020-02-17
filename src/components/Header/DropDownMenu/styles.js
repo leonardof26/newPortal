@@ -12,12 +12,16 @@ export const Container = styled.div`
   @media (min-width: 1px) and (max-width: 1000px) {
     padding: 5px 1px;
   }
-
-  background: ${props => (props.currentPage ? '#fff' : '#222239')};
-  border-radius: ${props => (props.currentPage ? '4px' : 0)};
 `
 
 export const Menu = styled.div`
+  .teste {
+    padding: 6px;
+    /* padding: ${props => (props.currentPage ? '6px' : 0)}; */
+    background: ${props => (props.currentPage ? '#fff' : '#222239')};
+    border-radius: ${props => (props.currentPage ? '4px' : 0)};
+  }
+
   span {
     font-size: 12px;
     color: ${props => (props.currentPage ? '#222239' : '#fff')};

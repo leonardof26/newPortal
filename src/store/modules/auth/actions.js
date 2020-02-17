@@ -5,10 +5,10 @@ export function signInRequest({ user, password }) {
   }
 }
 
-export function signInSuccess(token, user) {
+export function signInSuccess(token, refreshToken, tokenExpirationDate, user) {
   return {
     type: '@auth/SIGN_IN_SUCCESS',
-    payload: { token, user },
+    payload: { token, refreshToken, tokenExpirationDate, user },
   }
 }
 
@@ -18,7 +18,14 @@ export function signFailure() {
   }
 }
 
-export function signOut() {
+export function updateToken(token, refreshToken) {
+  return {
+    type: '@auth/REFRESH_TOKEN',
+    payload: { token, refreshToken },
+  }
+}
+
+export function signOutRequest() {
   return {
     type: '@auth/SIGN_OUT',
   }

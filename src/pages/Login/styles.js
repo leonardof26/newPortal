@@ -95,8 +95,8 @@ export const Menu = styled.div`
           border: 1px solid #bbb;
           border-radius: 4px;
           color: #222239;
-          padding: 10px 11px;
-          height: 40px;
+          padding: 5px 11px;
+          height: 32px;
           width: 51%;
           transition: background 0.2s;
 

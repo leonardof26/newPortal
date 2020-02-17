@@ -1,11 +1,11 @@
-import { parseISO, isAfter } from 'date-fns'
 import api from '../api'
 
-import { store } from '../../store'
-
-const token = {
-  refreshToken: () => {
-    return api.get('Foursys.API/api/Cliente').then(res => res.data)
+export const auth = {
+  getToken: user => {
+    return api.post('Foursys.AuthProvider/api/Auth/Token', user)
+  },
+  refreshToken: payload => {
+    return api.post('Foursys.AuthProvider/api/Auth/RefreshToken', payload)
   },
 }
 
@@ -24,21 +24,14 @@ export const saleProfiles = {
   },
 }
 
-export const teste = () => {
-  console.log(store)
+export const roles = {
+  getRoles: () => {
+    return api.get('Foursys.API/api/Cargo')
+  },
+  addRole: role => {
+    return api.post('Foursys.API/api/Cargo', role)
+  },
+  updateRole: role => {
+    return api.put('Foursys.API/api/Cargo', role)
+  },
 }
-
-// const refreshToken = async token => {
-//   const response = await token.refreshToken(token)
-// }
-
-// const checkTokenExpired = () => {
-//   const tokenExpirationDate = localStorage.getItem('tokenExpirationDate')
-
-//   if (isAfter(parseISO(tokenExpirationDate), new Date())) {
-//   }
-// }
-
-// const callAPI = call => {
-//   check
-// }

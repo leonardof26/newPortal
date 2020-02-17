@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-import { Input } from '@rocketseat/unform'
+import NumberFormat from 'react-number-format'
 
-export const Container = styled(Input)`
+export const Container = styled(NumberFormat)`
   height: 32px;
   border-radius: 5px;
   border: 1px solid #b3b8bd;

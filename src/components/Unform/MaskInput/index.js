@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react'
-import NumberFormat from 'react-number-format'
 import PropTypes from 'prop-types'
 
 import { useField } from '@rocketseat/unform'
+
+import { Container } from './styles'
 
 export default function MaskInput({ name, ...rest }) {
   const ref = useRef(null)
@@ -26,7 +27,7 @@ export default function MaskInput({ name, ...rest }) {
 
   return (
     <>
-      <NumberFormat
+      <Container
         name={fieldName}
         ref={ref}
         defaultValue={defaultValue}

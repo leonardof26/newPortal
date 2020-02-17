@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { signOut } from '../../store/modules/auth/actions'
+import { signOutRequest } from '../../store/modules/auth/actions'
 
 import { menus } from '../../assets/menuItens'
 import logo from '../../assets/Images/4SYS.png'
@@ -32,7 +32,7 @@ export default function Header({ path }) {
   )
 
   function handleLogout() {
-    dispatch(signOut())
+    dispatch(signOutRequest())
   }
 
   return (

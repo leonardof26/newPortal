@@ -11,9 +11,19 @@ import Button from '../../../components/Button'
 import Title from '../../../components/Title'
 import MaskInput from '../../../components/Unform/MaskInput'
 import { formatPrice } from '../../../util/format'
+
 import { saleProfiles } from '../../../services/API/calls'
 
 import { Container, FormSelect, TopForm, ProfileTable, Select } from './styles'
+
+const customStyles = {
+  control: base => ({
+    ...base,
+    height: 32,
+    minHeight: 32,
+    position: 'initial',
+  }),
+}
 
 export default function BradescoProfile() {
   const [perfilList, setPerfilList] = useState([])
@@ -50,6 +60,9 @@ export default function BradescoProfile() {
   }, [client])// eslint-disable-line
 
   async function getProfileList() {
+    if (client === '') {
+      return
+    }
     const response = await saleProfiles.getProfileList(client)
 
     setPerfilList(
@@ -107,6 +120,7 @@ export default function BradescoProfile() {
 
   function handleChangeOption(selectedOption) {
     setClient(selectedOption.value)
+
     setPerfilName('')
     setHourlyCost('')
   }
@@ -135,6 +149,10 @@ export default function BradescoProfile() {
             options={clientList}
             onChange={handleChangeOption}
             isDisabled={editing}
+            styles={customStyles}
+            width="200px"
+            height="10px"
+            min-height="10px"
           />
         </FormSelect>
         <TopForm>

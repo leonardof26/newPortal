@@ -6,20 +6,8 @@ export const Container = styled.div`
   margin: 0 2%;
 `
 
-export const Title = styled.h1`
-  margin-top: 10px;
-  background-color: #fbfbfb;
-  color: #222239;
-  border-radius: 5px;
-  font-size: 15px;
-  font-weight: 200;
-  height: 38px;
-  padding: 9px 15px;
-  box-shadow: 0px 2px 5px -1px rgba(0, 0, 0, 0.2);
-`
-
 export const FormSelect = styled.div`
-  width: 25%;
+  width: 22%;
 
   p {
     margin-bottom: 5px;
@@ -27,7 +15,7 @@ export const FormSelect = styled.div`
 `
 
 export const TopForm = styled.div`
-  margin-top: 10px;
+  margin-top: 15px;
   display: flex;
   align-content: flex-end;
   align-items: ${props => (props.error ? 'center' : 'flex-end')};
@@ -36,11 +24,17 @@ export const TopForm = styled.div`
     margin-right: 20px;
     display: flex;
     flex-direction: column;
+
+    &:first-child {
+      width: 22%;
+    }
+
+    &:nth-child(2) {
+      width: 150px;
+    }
   }
 
   button {
-    height: 38px;
-    padding: 0 30px;
     margin-right: 10px;
   }
 
@@ -63,27 +57,27 @@ export const ProfileTable = styled.table`
   margin-right: auto;
   border-collapse: collapse;
   min-width: 400px;
-  width: 35%;
-  margin-bottom: 10px;
+  width: 60%;
+  margin-bottom: 15px;
 
   thead {
     background: #222239;
     color: #fff;
-    border-radius: 10px;
-    border: 1px solid #222239;
+    font-size: 14px !important;
 
     th {
-      padding: 15px 0;
       font-weight: 300;
+      height: 40px;
     }
   }
 
   tbody {
     border: 1px solid #b3b8bd;
+    font-size: 13px !important;
 
     td {
       border-bottom: 1px solid #b3b8bd;
-      padding: 15px 0;
+      height: 40px;
 
       svg {
         font-size: 21px;
@@ -102,7 +96,7 @@ export const ProfileTable = styled.table`
   tbody td,
   thead th {
     &:nth-child(1) {
-      width: 15%;
+      width: 10%;
       text-align: center;
     }
     &:nth-child(2) {
@@ -118,4 +112,9 @@ export const ProfileTable = styled.table`
     }
   }
 `
-export const Select = styled(ReactSelect)``
+export const Select = styled(ReactSelect)`
+  .css-tlfecz-indicatorContainer,
+  .css-1gtu0rj-indicatorContainer {
+    padding: 5px 8px;
+  }
+`

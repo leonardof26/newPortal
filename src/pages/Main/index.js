@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 
 import Carousel from 'react-bootstrap/Carousel'
-import { teste } from '../../services/API/calls'
 
 import img1 from '../../assets/Images/imagem1.png'
 import img2 from '../../assets/Images/imagem2.png'
@@ -10,10 +9,6 @@ import img3 from '../../assets/Images/imagem3.png'
 import { Container, LateralMenu } from './styles'
 
 export default function Main() {
-  useEffect(() => {
-    teste()
-  }, [])
-
   return (
     <Container>
       <Carousel controls={false} className="Carousel">

@@ -9,6 +9,7 @@ import Pricing from '../pages/FoursysMenu/Pricing/List'
 
 import Profiles from '../pages/Parametrization/Profiles'
 import MonthlyHour from '../pages/Parametrization/MonthlyHour'
+import Roles from '../pages/Parametrization/Roles'
 
 export default function Routes() {
   return (
@@ -20,6 +21,7 @@ export default function Routes() {
 
       <Route path="/parametrizacao/perfilvenda" component={Profiles} />
       <Route path="/parametrizacao/monthlyhours" component={MonthlyHour} />
+      <Route path="/parametrizacao/roles" component={Roles} />
     </Switch>
   )
 }

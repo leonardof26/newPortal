@@ -28,7 +28,7 @@ export default createGlobalStyle`
 
   body, input, button{
     font-family: 'Nunito', sans-serif !important;
-    font-size: 12px !important;
+    font-size: 14px !important;
   }
 
   a{

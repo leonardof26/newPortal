@@ -33,7 +33,7 @@ export default function DropDownMenu({ keyValue, menuTitle, menuItens, path }) {
       key={keyValue}
     >
       <Menu currentPage={path.indexOf(cleanMenuName.toLowerCase()) !== -1}>
-        <div>
+        <div className="teste">
           <span>{menuTitle}</span>
           <i />
         </div>
