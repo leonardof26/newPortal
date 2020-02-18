@@ -1,52 +1,138 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useImmer } from 'use-immer'
 
-import { Form, Input } from '@rocketseat/unform'
+import { Form } from '@rocketseat/unform'
+
+import { monthHours } from '../../../services/API/calls'
+
+import Button from '../../../components/Button'
+import Title from '../../../components/Title'
 
 import {
   Container,
-  Title,
   CodeForm,
   Select,
   YearTable,
   BottomScreen,
+  Input,
 } from './styles'
 
-const years = [
-  { label: '2000', value: '2000' },
-  { label: '2001', value: '2001' },
-  { label: '2002', value: '2002' },
-  { label: '2003', value: '2003' },
-  { label: '2004', value: '2004' },
-  { label: '2005', value: '2005' },
-  { label: '2006', value: '2006' },
-  { label: '2007', value: '2007' },
-  { label: '2008', value: '2008' },
-  { label: '2009', value: '2009' },
-  { label: '2010', value: '2010' },
-  { label: '2011', value: '2011' },
-  { label: '2012', value: '2012' },
-  { label: '2013', value: '2013' },
-  { label: '2014', value: '2014' },
-  { label: '2015', value: '2015' },
-  { label: '2016', value: '2016' },
-  { label: '2017', value: '2017' },
-  { label: '2018', value: '2018' },
-  { label: '2019', value: '2019' },
-  { label: '2020', value: '2020' },
-  { label: '2021', value: '2021' },
+const months = [
+  'jan',
+  'feb',
+  'mar',
+  'apr',
+  'may',
+  'jun',
+  'jul',
+  'aug',
+  'sep',
+  'oct',
+  'nov',
+  'dez',
 ]
 
+const initialHours = ['', '', '', '', '', '', '', '', '', '', '', '']
+
+const currentYear = new Date().getFullYear()
+const defaultSelect = { label: currentYear, value: currentYear }
+
 export default function MonthlyHour() {
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
+  const [monthHour, setMonthHour] = useImmer(initialHours)
+
+  async function getHours() {
+    const resp = await monthHours.getHours(selectedYear)
+
+    setMonthHour(draft => {
+      draft[0] = ''
+      draft[1] = ''
+      draft[2] = ''
+      draft[3] = ''
+      draft[4] = ''
+      draft[5] = ''
+      draft[6] = ''
+      draft[7] = ''
+      draft[8] = ''
+      draft[9] = ''
+      draft[10] = ''
+      draft[11] = ''
+      resp.data.map(month => {
+        draft[month.dtMesReferencia - 1] = month.qtHorasUteis
+      })
+    })
+  }
+
+  useEffect(() => {
+    getHours()
+  }, [selectedYear])// eslint-disable-line
+
+  function handleYearChange(selected) {
+    setSelectedYear(selected.value)
+  }
+
+  function getSelectOpts() {
+    const options = []
+    for (let i = new Date().getFullYear() + 1; i >= 2000; i--) {
+      options.push({ label: i, value: i })
+    }
+
+    return options
+  }
+
+  function handleInputChange(e, index) {
+    e.persist()
+
+    setMonthHour(draft => {
+      draft[index] = e.target.value
+    })
+
+    // if (e.target.value.length === 3) {
+    //   const element = document.getElementById(
+    //     `${parseInt(e.target.id, 10) + 1}`
+    //   )
+
+    //   if (element) {
+    //     element.focus()
+    //   }
+    // }
+  }
+
+  async function updateHours(data) {
+    const payload = Object.values(data)
+      .map((hours, index) => {
+        if (hours !== '') {
+          return {
+            dtAnoReferencia: selectedYear,
+            dtMesReferencia: index + 1,
+            qtHorasUteis: parseInt(hours, 10),
+          }
+        }
+      })
+      .filter(hours => {
+        return hours
+      })
+
+    await monthHours.addHours(payload)
+
+    getHours()
+  }
+
   return (
     <Container>
       <Title>Parametrização: Quantidade Horas Mês</Title>
 
       <CodeForm>
         <p>Ano:</p>
-        <Select name="year" options={years} />
+        <Select
+          name="year"
+          options={getSelectOpts()}
+          defaultValue={defaultSelect}
+          onChange={handleYearChange}
+        />
       </CodeForm>
 
-      <Form>
+      <Form onSubmit={updateHours}>
         <YearTable>
           <thead>
             <tr>
@@ -67,49 +153,28 @@ export default function MonthlyHour() {
 
           <tbody>
             <tr>
-              <td>
-                <Input name="january" />
-              </td>
-              <td>
-                <Input name="feb" />
-              </td>
-              <td>
-                <Input name="mar" />
-              </td>
-              <td>
-                <Input name="apr" />
-              </td>
-              <td>
-                <Input name="may" />
-              </td>
-              <td>
-                <Input name="jun" />
-              </td>
-              <td>
-                <Input name="jul" />
-              </td>
-              <td>
-                <Input name="aug" />
-              </td>
-              <td>
-                <Input name="sep" />
-              </td>
-              <td>
-                <Input name="oct" />
-              </td>
-              <td>
-                <Input name="nov" />
-              </td>
-              <td>
-                <Input name="dec" />
-              </td>
+              {months.map((month, index) => (
+                <td key={month}>
+                  <Input
+                    id={index}
+                    name={month}
+                    type="text"
+                    autoComplete="off"
+                    maxLength={3}
+                    onChange={e => handleInputChange(e, index)}
+                    value={monthHour[index]}
+                  />
+                </td>
+              ))}
             </tr>
           </tbody>
         </YearTable>
 
         <BottomScreen>
           <a />
-          <button type="submit">Atualizar</button>
+          <Button type="submit" darken big>
+            Atualizar
+          </Button>
         </BottomScreen>
       </Form>
     </Container>

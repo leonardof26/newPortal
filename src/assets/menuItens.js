@@ -31,6 +31,10 @@ const menus = [
             link: { type: 'link', url: '/parametrizacao/roles' },
             title: 'Cargos',
           },
+          {
+            link: { type: 'link', url: '/parametrizacao/technology' },
+            title: 'Tecnologias',
+          },
         ],
       },
     ],

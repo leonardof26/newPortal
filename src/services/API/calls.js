@@ -35,3 +35,18 @@ export const roles = {
     return api.put('Foursys.API/api/Cargo', role)
   },
 }
+
+export const monthHours = {
+  getHours: year => {
+    return api.get(`Foursys.API/api/HorasUteis/${year}`)
+  },
+  addHours: payload => {
+    return api.post(`Foursys.API/api/HorasUteis`, payload)
+  },
+}
+
+export const technology = {
+  getTechnologies: () => {
+    return api.get(`Foursys.API/api/Tecnologia`)
+  },
+}

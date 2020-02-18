@@ -7,10 +7,9 @@ export const Container = styled.button`
   background: ${props => (props.darken ? '#222239' : '#fff')};
   color: ${props => (props.darken ? '#fff' : '#222239')};
   border-radius: 4px;
-  padding: 10px;
+  padding: ${props => (props.big ? '0 32px' : '0 20px')};
   transition: background 0.2s;
-  height: 32px;
-  padding: 0 20px;
+  height: ${props => (props.big ? '40px' : '32px')};
 
   &:hover {
     background: ${props =>
