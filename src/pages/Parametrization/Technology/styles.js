@@ -69,11 +69,15 @@ export const TechsTable = styled.table`
       border-bottom: 1px solid #b3b8bd;
       height: 40px;
 
-      svg {
-        font-size: 19px;
-        padding: 0 2px;
+      div {
         border: 1px solid #222239;
         border-radius: 4px;
+        height: 20px;
+        width: 20px;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
 
         &:hover {
           background: #f1f1f1;
@@ -86,7 +90,7 @@ export const TechsTable = styled.table`
   tbody td,
   thead th {
     &:nth-child(1) {
-      width: 10%;
+      width: 12%;
       text-align: center;
     }
     &:nth-child(2) {
@@ -94,17 +98,19 @@ export const TechsTable = styled.table`
       text-align: left;
     }
     &:nth-child(3) {
-      width: 10%;
-      text-align: center;
+      width: 8%;
+      text-align: right;
     }
   }
 `
 export const CheckBox = styled.label`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   align-content: center;
   padding-bottom: 0;
   margin-bottom: 0;
+  border: 1px solid #222239;
+  border-radius: 2px;
 
   input {
     position: absolute;
@@ -123,19 +129,26 @@ export const CheckBox = styled.label`
   }
 
   .checkbox {
-    height: 15px;
-    width: 15px;
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 13px;
+    width: 13px;
     background-color: #fff;
-    padding: 0.5px 4px;
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
 
     &:after {
       content: '';
+      position: absolute;
       display: none;
 
-      left: 11px;
-      top: 5px;
-      width: 5px;
-      height: 10px;
+      left: 5px;
+      top: 0px;
+      width: 4px;
+      height: 11px;
       border: solid #222239;
       border-width: 0 2px 2px 0;
       -webkit-transform: rotate(45deg);

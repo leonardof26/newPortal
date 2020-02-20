@@ -1,3 +1,4 @@
+import querystring from 'querystring'
 import api from '../api'
 
 export const auth = {
@@ -48,5 +49,15 @@ export const monthHours = {
 export const technology = {
   getTechnologies: () => {
     return api.get(`Foursys.API/api/Tecnologia`)
+  },
+  addTechnology: tech => {
+    return api.post(`Foursys.API/api/Tecnologia`, tech)
+  },
+  updateTechnology: payload => {
+    return api.put(`Foursys.API/api/Tecnologia`, payload)
+  },
+  deleteTechnology: ({ cdTecnologia, dsTecnologia }) => {
+    const string = querystring.stringify({ cdTecnologia, dsTecnologia })
+    return api.delete(`Foursys.API/api/Tecnologia?${string}`)
   },
 }
