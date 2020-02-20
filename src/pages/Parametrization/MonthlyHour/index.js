@@ -5,6 +5,7 @@ import { Form } from '@rocketseat/unform'
 
 import { FaSpinner } from 'react-icons/fa/'
 import { monthHours } from '../../../services/API/calls'
+import LoadingPage from '../../../components/LoadingPage'
 
 import Button from '../../../components/Button'
 import Title from '../../../components/Title'
@@ -122,9 +123,7 @@ export default function MonthlyHour() {
 
   return (
     <Container>
-      <Loading>
-        <FaSpinner color="#ddd" size={40} />
-      </Loading>
+      <LoadingPage />
       <Title>Parametrização: Quantidade Horas Mês</Title>
 
       <CodeForm>
