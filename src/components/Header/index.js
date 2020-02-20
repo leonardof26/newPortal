@@ -50,6 +50,7 @@ export default function Header({ path }) {
                 <DropDownMenu
                   keyValue={item.title}
                   menuTitle={item.title}
+                  menuID={item.id}
                   menuItens={item.itens}
                   path={path}
                   key={`menu:${item.title}`}

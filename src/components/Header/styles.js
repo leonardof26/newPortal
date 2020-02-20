@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 
 export const Container = styled.div`
-  height: 60px;
-  padding: 5px 30px;
-  /* padding-top: 5px; */
+  padding: 0 30px;
   background: #222239;
+  min-height: 60px;
+  display: flex;
 `
 
 export const Content = styled.div`
@@ -13,7 +13,7 @@ export const Content = styled.div`
   align-content: center;
   align-items: center;
   justify-content: space-between;
-  margin: 0 auto;
+  width: 100%;
 
   nav {
     display: flex;

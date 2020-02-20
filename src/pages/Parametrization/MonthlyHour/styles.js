@@ -1,7 +1,16 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 import ReactSelect from '../../../components/Unform/ReactSelect'
 import MaskInput from '../../../components/Unform/MaskInput'
+
+const rotate = keyframes`
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+`
 
 export const Container = styled.div`
   margin: 0 2%;
@@ -84,4 +93,24 @@ export const BottomScreen = styled.div`
     margin-bottom: 5px;
   }
 `
+
 export const Input = styled(MaskInput)``
+
+export const Loading = styled.div`
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: block;
+
+  svg {
+    position: absolute;
+    animation: ${rotate} 2s linear infinite;
+    left: 48%;
+    top: 40%;
+  }
+`

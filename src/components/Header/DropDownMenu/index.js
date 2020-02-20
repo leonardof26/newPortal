@@ -6,12 +6,13 @@ import PropTypes from 'prop-types'
 
 import { Container, Menu, DropDownContent, DropDownColumn } from './styles'
 
-export default function DropDownMenu({ keyValue, menuTitle, menuItens, path }) {
-  const cleanMenuName = menuTitle
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f\s]/g, '')
-    .toLowerCase()
-
+export default function DropDownMenu({
+  keyValue,
+  menuTitle,
+  menuID,
+  menuItens,
+  path,
+}) {
   function generateDropCollum(item) {
     return (
       <DropDownColumn key={ids.generate()}>
@@ -29,10 +30,10 @@ export default function DropDownMenu({ keyValue, menuTitle, menuItens, path }) {
 
   return (
     <Container
-      currentPage={path.indexOf(cleanMenuName.toLowerCase()) !== -1}
+      currentPage={path.indexOf(menuID.toLowerCase()) !== -1}
       key={keyValue}
     >
-      <Menu currentPage={path.indexOf(cleanMenuName.toLowerCase()) !== -1}>
+      <Menu currentPage={path.indexOf(menuID.toLowerCase()) !== -1}>
         <div className="teste">
           <span>{menuTitle}</span>
           <i />
@@ -51,5 +52,6 @@ DropDownMenu.propTypes = {
   keyValue: PropTypes.string.isRequired,
   menuTitle: PropTypes.string.isRequired,
   menuItens: PropTypes.arrayOf(PropTypes.object).isRequired,
+  menuID: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
 }

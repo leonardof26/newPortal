@@ -3,6 +3,7 @@ import { useImmer } from 'use-immer'
 
 import { Form } from '@rocketseat/unform'
 
+import { FaSpinner } from 'react-icons/fa/'
 import { monthHours } from '../../../services/API/calls'
 
 import Button from '../../../components/Button'
@@ -15,6 +16,7 @@ import {
   YearTable,
   BottomScreen,
   Input,
+  Loading,
 } from './styles'
 
 const months = [
@@ -120,6 +122,9 @@ export default function MonthlyHour() {
 
   return (
     <Container>
+      <Loading>
+        <FaSpinner color="#ddd" size={40} />
+      </Loading>
       <Title>Parametrização: Quantidade Horas Mês</Title>
 
       <CodeForm>

@@ -5,7 +5,7 @@ import { MdModeEdit } from 'react-icons/md'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
 
-import { Form } from '@rocketseat/unform'
+import { Form } from '@unform/web'
 import Input from '../../../components/Input'
 import Button from '../../../components/Button'
 import Title from '../../../components/Title'
