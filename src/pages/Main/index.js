@@ -20,7 +20,7 @@ export default function Main() {
   const isIE = /* @cc_on!@ */ false || !!document.documentMode
 
   return (
-    <Container>
+    <Container isIE={isIE}>
       <div id="demo" className="carousel slide" data-ride="carousel">
         <ul className="carousel-indicators">
           <li data-target="#demo" data-slide-to="0" className="active" />
@@ -42,7 +42,7 @@ export default function Main() {
       </div>
 
       <BoxContainer>
-        <Box isIE={isIE}>
+        <Box>
           <a
             href="http://4sys-aws01/Metodologia/"
             target="_blank"
@@ -54,7 +54,7 @@ export default function Main() {
             <span>Metodologia</span>
           </a>
         </Box>
-        <Box isIE={isIE}>
+        <Box>
           <a
             href="https://sgo.assisteconline.com.br/sgo_foursys/"
             target="_blank"
@@ -66,7 +66,7 @@ export default function Main() {
             <span>SGO</span>
           </a>
         </Box>
-        <Box isIE={isIE}>
+        <Box>
           <a
             href="http://webmail.foursys.com.br/"
             target="_blank"
@@ -78,7 +78,7 @@ export default function Main() {
             <span>E-mail</span>
           </a>
         </Box>
-        <Box isIE={isIE}>
+        <Box>
           <a
             href="http://4sys-pap05:8080/ListaRamais/"
             target="_blank"
@@ -90,7 +90,7 @@ export default function Main() {
             <span>Lista de Ramais</span>
           </a>
         </Box>
-        <Box isIE={isIE}>
+        <Box>
           <a
             href="file://10.1.255.249/temporario/"
             target="_blank"
@@ -102,7 +102,7 @@ export default function Main() {
             <span>Temporário</span>
           </a>
         </Box>
-        <Box isIE={isIE}>
+        <Box>
           <a
             href="http://mantis.devops.foursys.com/login_page.php"
             target="_blank"
@@ -114,7 +114,7 @@ export default function Main() {
             <span>Mantis</span>
           </a>
         </Box>
-        <Box isIE={isIE}>
+        <Box>
           <a
             href="https://crm.foursys.com/"
             target="_blank"
@@ -126,7 +126,7 @@ export default function Main() {
             <span>CRM</span>
           </a>
         </Box>
-        <Box isIE={isIE}>
+        <Box>
           <a
             href="http://54.147.166.34/srs/"
             target="_blank"

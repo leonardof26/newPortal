@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
 
   .carousel {
-    width: -webkit-fill-available;
+    width: ${props => (props.isIE ? '100%' : '-webkit-fill-available')};
   }
 
   .carousel-inner img {

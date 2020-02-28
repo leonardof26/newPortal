@@ -26,7 +26,6 @@ export default function Routes() {
       <Route path="/parametrizacao/monthlyhours" component={MonthlyHour} />
       <Route path="/parametrizacao/roles" component={Roles} />
       <Route path="/parametrizacao/technology" component={Technology} />
-      <Route path="" component={Main} />
     </Switch>
   )
 }

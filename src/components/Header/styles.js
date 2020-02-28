@@ -4,8 +4,10 @@ import { darken } from 'polished'
 export const Container = styled.div`
   padding: 0 30px;
   background: #222239;
-  min-height: 60px;
+  height: 60px;
   display: flex;
+  align-content: center;
+  align-items: center;
 `
 
 export const Content = styled.div`
@@ -114,6 +116,7 @@ export const DropDownExit = styled.div`
   left: calc(100% - 130px);
   top: calc(100% + 10px);
   background: #eee;
+  z-index: 20000;
 
   ${UserButton}:hover & {
     display: flex;
