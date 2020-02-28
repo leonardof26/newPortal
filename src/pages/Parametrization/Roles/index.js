@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 import { MdModeEdit } from 'react-icons/md'
 
@@ -12,6 +12,7 @@ import Title from '../../../components/Title'
 import MaskInput from '../../../components/Unform/MaskInput'
 import { formatPrice } from '../../../util/format'
 import { roles } from '../../../services/API/calls'
+import LoadingPage from '../../../components/LoadingPage'
 
 import { Container, TopForm, RoleTable } from './styles'
 
@@ -21,12 +22,17 @@ export default function Roles() {
   const [hourlyCost, setHourlyCost] = useState('')
   const [editing, setEditing] = useState(false)
   const [selectedRole, setSelectedRole] = useState()
+  const [loading, setLoading] = useState(false)
+
+  const formRef = useRef(null)
 
   useEffect(() => {
     getRolesList()
   }, [])
 
   async function getRolesList() {
+    setLoading(true)
+
     const response = await roles.getRoles()
 
     setRoleList(
@@ -35,6 +41,8 @@ export default function Roles() {
         formattedPrice: formatPrice(parseFloat(role.vlMedio)),
       }))
     )
+
+    setLoading(false)
   }
 
   const schema = Yup.object().shape({
@@ -58,10 +66,24 @@ export default function Roles() {
         vlMedio: parseFloat(data.price),
       }
       try {
+        await schema.validate(data, { abortEarly: false })
+
         await roles.updateRole(role)
 
         toast.success('Cargo alterado com sucesso!')
       } catch (error) {
+        const validationErrors = {}
+
+        if (error instanceof Yup.ValidationError) {
+          error.inner.forEach(err => {
+            validationErrors[err.path] = err.message
+          })
+
+          formRef.current.setErrors(validationErrors)
+
+          return
+        }
+
         toast.error('Erro ao atualizar Cargo')
         return
       }
@@ -72,10 +94,23 @@ export default function Roles() {
       }
 
       try {
+        await schema.validate(data, { abortEarly: false })
+
         await roles.addRole(role)
 
         toast.success('Cargo cadastrado com sucesso!')
       } catch (error) {
+        const validationErrors = {}
+
+        if (error instanceof Yup.ValidationError) {
+          error.inner.forEach(err => {
+            validationErrors[err.path] = err.message
+          })
+
+          formRef.current.setErrors(validationErrors)
+          return
+        }
+
         toast.error('Erro ao cadastrar Perfil')
         return
       }
@@ -101,9 +136,10 @@ export default function Roles() {
 
   return (
     <Container>
+      {loading && <LoadingPage />}
       <Title>Parametrização: Cargos</Title>
 
-      <Form schema={schema} onSubmit={registerRole}>
+      <Form ref={formRef} onSubmit={registerRole}>
         <TopForm>
           <div>
             <p>Nome Cargo:</p>
@@ -111,6 +147,7 @@ export default function Roles() {
               name="name"
               value={roleName}
               onChange={e => setRoleName(e.target.value)}
+              err={roleName.length === 0}
             />
           </div>
           <div>
@@ -123,6 +160,7 @@ export default function Roles() {
               default={hourlyCost || ''}
               value={hourlyCost}
               onChange={e => setHourlyCost(e.target.value)}
+              err={hourlyCost.length === 0}
             />
           </div>
           <Button darken type="submit">

@@ -2,57 +2,77 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-  .Carousel {
-    width: 75%;
+  .carousel {
+    width: -webkit-fill-available;
   }
 
-  .carousel-item img {
-    height: 450px;
+  .carousel-inner img {
     width: 100%;
-  }
-
-  ol.carousel-indicators li {
-    height: 8px;
-    width: 8px;
-    background-color: white;
-    border-radius: 50%;
+    height: 370px;
   }
 `
 
-export const LateralMenu = styled.div`
-  display: table;
+export const BoxContainer = styled.ul`
+  margin: 0;
+  padding: 20px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+  justify-content: center;
+`
 
-  ul {
-    display: table-row;
-    cursor: pointer;
-  }
+export const Box = styled.li`
+  margin-right: 40px;
 
   a {
-    display: table-cell;
-    color: white;
-    background: #222239;
-    border: 1px solid white;
-    border-top: 0px;
-    text-align: center;
-    vertical-align: middle;
-    height: 150px;
-    width: 175px;
-    font-size: 11px;
-    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
 
-    &:nth-child(1),
-    &:nth-child(2) {
-      border-top: 1px solid white;
-    }
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+    width: 120px;
+    height: 120px;
+    border-radius: 30px;
+    box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.16);
+    padding: 15px;
+    margin-bottom: 15px;
+  }
 
-    &:hover {
-      backface-visibility: hidden;
-      transform: translateZ(0);
-      -webkit-font-smoothing: subpixel-antialiased;
-      transform: scale(1.011, 1.011);
-      color: #ffffff;
-      font-size: 14px;
-    }
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  span {
+    align-items: center;
+    font-size: 13px !important;
+    font-weight: 600;
+    color: #222239;
+  }
+
+  :hover {
+    backface-visibility: visible;
+    -webkit-font-smoothing: subpixel-antialiased;
+    transform: scale(1.05);
+  }
+
+  :hover span {
+    color: #222239;
+    font-weight: bolder;
+    text-decoration: underline;
+    text-decoration-color: #222239;
   }
 `

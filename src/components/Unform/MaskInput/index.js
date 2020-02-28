@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import { useField } from '@rocketseat/unform'
+import { useField } from '@unform/core'
 
 import { Container } from './styles'
 
-export default function MaskInput({ name, ...rest }) {
+export default function MaskInput({ err, name, ...rest }) {
   const ref = useRef(null)
   const { fieldName, registerField, defaultValue, error } = useField(name)
 
@@ -18,7 +18,7 @@ export default function MaskInput({ name, ...rest }) {
       name: fieldName,
       ref: ref.current,
       path: 'state.value',
-      parseValue: parseSelectValue,
+      getValue: parseSelectValue,
       clearValue: pickerRef => {
         pickerRef.clear()
       },
@@ -28,12 +28,13 @@ export default function MaskInput({ name, ...rest }) {
   return (
     <>
       <Container
+        error={error && err}
         name={fieldName}
         ref={ref}
         defaultValue={defaultValue}
         {...rest}
       />
-      {error && <span>{error}</span>}
+      {/* {error && <span>{error}</span>} */}
     </>
   )
 }

@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import Table from '../../../components/Table'
+
 export const Container = styled.div`
   margin: 0 2%;
 `
@@ -41,49 +43,24 @@ export const TopForm = styled.div`
   }
 `
 
-export const TechsTable = styled.table`
-  margin-top: 30px;
+export const TechsTable = styled(Table)`
   margin-left: auto;
   margin-right: auto;
-  border-collapse: collapse;
   width: 40%;
-  margin-bottom: 15px;
 
-  thead {
-    background: #222239;
+  div {
     border: 1px solid #222239;
-    color: #fff;
-    font-size: 14px !important;
+    border-radius: 4px;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
 
-    th {
-      font-weight: 300;
-      height: 40px;
-    }
-  }
-
-  tbody {
-    border: 1px solid #b3b8bd;
-    font-size: 13px !important;
-
-    td {
-      border-bottom: 1px solid #b3b8bd;
-      height: 40px;
-
-      div {
-        border: 1px solid #222239;
-        border-radius: 4px;
-        height: 20px;
-        width: 20px;
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
-
-        &:hover {
-          background: #f1f1f1;
-          cursor: pointer;
-        }
-      }
+    &:hover {
+      background: #f1f1f1;
+      cursor: pointer;
     }
   }
 

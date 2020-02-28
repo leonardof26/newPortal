@@ -1,27 +1,35 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { useField } from '@unform/core'
 
-export default function Input({ name, label, ...rest }) {
+import { Container } from './styles'
+
+export default function Input({ name, label, err, ...rest }) {
   const inputRef = useRef(null)
+
   const { fieldName, defaultValue, registerField, error } = useField(name)
+
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'target.value',
+      path: 'value',
     })
   }, [fieldName, registerField])
+
   return (
     <>
-      <label htmlFor={fieldName}>{label}</label>
-      <input
+      {/* <label htmlFor={fieldName}>{label}</label> */}
+
+      <Container
+        error={error && err}
         id={fieldName}
         ref={inputRef}
         defaultValue={defaultValue}
-        className={error ? 'has-error' : ''}
+        className={error ? 'error' : ''}
         {...rest}
       />
-      {error && <span className="error">{error}</span>}
+
+      {/* {error && <span className="error">{error}</span>} */}
     </>
   )
 }

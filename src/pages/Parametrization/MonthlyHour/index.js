@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useImmer } from 'use-immer'
 
-import { Form } from '@rocketseat/unform'
+import { Form } from '@unform/web'
+import { toast } from 'react-toastify'
 
-import { FaSpinner } from 'react-icons/fa/'
 import { monthHours } from '../../../services/API/calls'
 import LoadingPage from '../../../components/LoadingPage'
 
@@ -17,7 +17,6 @@ import {
   YearTable,
   BottomScreen,
   Input,
-  Loading,
 } from './styles'
 
 const months = [
@@ -43,8 +42,10 @@ const defaultSelect = { label: currentYear, value: currentYear }
 export default function MonthlyHour() {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear())
   const [monthHour, setMonthHour] = useImmer(initialHours)
+  const [loading, setLoading] = useState(false)
 
   async function getHours() {
+    setLoading(true)
     const resp = await monthHours.getHours(selectedYear)
 
     setMonthHour(draft => {
@@ -64,6 +65,8 @@ export default function MonthlyHour() {
         draft[month.dtMesReferencia - 1] = month.qtHorasUteis
       })
     })
+
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -83,22 +86,12 @@ export default function MonthlyHour() {
     return options
   }
 
-  function handleInputChange(e, index) {
+  async function handleInputChange(e, index) {
     e.persist()
 
     setMonthHour(draft => {
       draft[index] = e.target.value
     })
-
-    // if (e.target.value.length === 3) {
-    //   const element = document.getElementById(
-    //     `${parseInt(e.target.id, 10) + 1}`
-    //   )
-
-    //   if (element) {
-    //     element.focus()
-    //   }
-    // }
   }
 
   async function updateHours(data) {
@@ -116,14 +109,21 @@ export default function MonthlyHour() {
         return hours
       })
 
-    await monthHours.addHours(payload)
+    try {
+      await monthHours.addHours(payload)
+
+      toast.success('Horas atualizadas com sucesso')
+    } catch (error) {
+      toast.error('Erro ao atualizar horas')
+    }
 
     getHours()
   }
 
   return (
     <Container>
-      <LoadingPage />
+      {loading && <LoadingPage />}
+
       <Title>Parametrização: Quantidade Horas Mês</Title>
 
       <CodeForm>

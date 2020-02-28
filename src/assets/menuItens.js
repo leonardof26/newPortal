@@ -1,7 +1,7 @@
 const menus = [
   {
     title: 'Menu Foursys',
-    id: 'menu',
+    id: 'menufoursys',
     itens: [
       {
         header: '',

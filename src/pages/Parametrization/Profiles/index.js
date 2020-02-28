@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 import { MdModeEdit } from 'react-icons/md'
 
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
+import { Form } from '@unform/web'
+import LoadingPage from '../../../components/LoadingPage'
 
-import { Form } from '@rocketseat/unform'
 import Input from '../../../components/Input'
 import Button from '../../../components/Button'
 import Title from '../../../components/Title'
@@ -33,6 +34,9 @@ export default function BradescoProfile() {
   const [hourlyCost, setHourlyCost] = useState('')
   const [editing, setEditing] = useState(false)
   const [selectedProfile, setSelectedProfile] = useState()
+  const [loading, setLoading] = useState(false)
+
+  const formRef = useRef(null)
 
   const schema = Yup.object().shape({
     name: Yup.string().required('Favor informar cargo'),
@@ -43,6 +47,7 @@ export default function BradescoProfile() {
 
   useEffect(() => {
     async function getClients() {
+      setLoading(true)
       const response = await saleProfiles.getClients()
 
       setClientList(
@@ -50,6 +55,8 @@ export default function BradescoProfile() {
           return { label: cliente.nmCliente, value: cliente.cdCliente }
         })
       )
+
+      setLoading(false)
     }
 
     getClients()
@@ -63,6 +70,8 @@ export default function BradescoProfile() {
     if (client === '') {
       return
     }
+    setLoading(true)
+
     const response = await saleProfiles.getProfileList(client)
 
     setPerfilList(
@@ -71,6 +80,8 @@ export default function BradescoProfile() {
         formattedPrice: formatPrice(profile.vlCusto),
       }))
     )
+
+    setLoading(false)
   }
 
   function handleCancel() {
@@ -88,10 +99,21 @@ export default function BradescoProfile() {
         cdCliente: client,
       }
       try {
+        await schema.validate(data, { abortEarly: false })
+
         await saleProfiles.updateProfile(profile)
 
         toast.success('Perfil alterado com sucesso!')
       } catch (error) {
+        const validationErrors = {}
+
+        if (error instanceof Yup.ValidationError) {
+          error.inner.forEach(err => {
+            validationErrors[err.path] = err.message
+          })
+
+          formRef.current.setErrors(validationErrors)
+        }
         toast.error('Erro ao atualizar Perfil')
         return
       }
@@ -103,10 +125,22 @@ export default function BradescoProfile() {
       }
 
       try {
+        await schema.validate(data, { abortEarly: false })
+
         await saleProfiles.addProfile(profile)
 
         toast.success('Perfil cadastrado com sucesso!')
       } catch (error) {
+        const validationErrors = {}
+
+        if (error instanceof Yup.ValidationError) {
+          error.inner.forEach(err => {
+            validationErrors[err.path] = err.message
+          })
+
+          formRef.current.setErrors(validationErrors)
+        }
+
         toast.error('Erro ao cadastrar Perfil')
         return
       }
@@ -139,9 +173,10 @@ export default function BradescoProfile() {
 
   return (
     <Container>
+      {loading && <LoadingPage />}
       <Title>Parametrização: Perfis de Venda</Title>
 
-      <Form onSubmit={registerProfile} schema={schema}>
+      <Form onSubmit={registerProfile} ref={formRef}>
         <FormSelect>
           <p>Cliente:</p>
           <Select
@@ -162,6 +197,7 @@ export default function BradescoProfile() {
               name="name"
               value={perfilName}
               onChange={e => setPerfilName(e.target.value)}
+              err={perfilName.length === 0}
             />
           </div>
           <div>
@@ -174,6 +210,7 @@ export default function BradescoProfile() {
               default={hourlyCost || ''}
               value={hourlyCost}
               onChange={e => setHourlyCost(e.target.value)}
+              err={hourlyCost.length === 0}
             />
           </div>
           <Button darken type="submit">

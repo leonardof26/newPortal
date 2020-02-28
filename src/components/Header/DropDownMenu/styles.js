@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  font-weight: 600;
+
   @media (min-width: 1200px) {
     padding: 14px 18px;
   }

@@ -45,7 +45,9 @@ export const Content = styled.div`
   }
 
   .loginButton {
+    height: 36px;
     padding: 8px 30px;
+    border-radius: 4px;
     color: #222239;
     background: #fff;
 
@@ -107,8 +109,9 @@ export const UserButton = styled.div`
 export const DropDownExit = styled.div`
   display: none;
   position: absolute;
-  width: 100px;
-  left: calc(100% - 70px);
+  width: 140px;
+  height: 40px;
+  left: calc(100% - 130px);
   top: calc(100% + 10px);
   background: #eee;
 
@@ -132,8 +135,8 @@ export const DropDownExit = styled.div`
     &::before {
       content: '';
       position: absolute;
-      left: calc(50% - 10px);
-      top: -10px;
+      left: 70%;
+      top: -7px;
       width: 0;
       height: 0;
       border-left: 10px solid transparent;

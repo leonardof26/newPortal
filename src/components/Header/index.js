@@ -17,6 +17,8 @@ export default function Header({ path }) {
   const { firstName, lastName } = useSelector(state => state.user.profile) || ''
   const dispatch = useDispatch()
 
+  const horaAtual = new Date().getHours()
+
   const nameInitials = useMemo(
     () =>
       firstName && lastName
@@ -34,6 +36,8 @@ export default function Header({ path }) {
   function handleLogout() {
     dispatch(signOutRequest())
   }
+
+  console.log(new Date().getHours())
 
   return (
     <Container>
@@ -62,8 +66,10 @@ export default function Header({ path }) {
         {signed ? (
           <Profile>
             <div>
-              <strong>Bom dia!</strong>
-              <strong>{userName}</strong>
+              {horaAtual < 12 && <strong>Bom dia,</strong>}
+              {horaAtual > 11 && horaAtual < 18 && <strong>Boa tarde,</strong>}
+              {horaAtual > 18 && <strong>Boa noite,</strong>}
+              <strong>{userName}!</strong>
             </div>
 
             <div className="userButton">

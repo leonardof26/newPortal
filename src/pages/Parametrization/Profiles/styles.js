@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import ReactSelect from '../../../components/Unform/ReactSelect'
+import Table from '../../../components/Table'
 
 export const Container = styled.div`
   margin: 0 2%;
@@ -51,45 +52,22 @@ export const TopForm = styled.div`
   }
 `
 
-export const ProfileTable = styled.table`
-  margin-top: 30px;
+export const ProfileTable = styled(Table)`
   margin-left: auto;
   margin-right: auto;
-  border-collapse: collapse;
   min-width: 400px;
   width: 60%;
   margin-bottom: 15px;
 
-  thead {
-    background: #222239;
-    color: #fff;
-    font-size: 14px !important;
+  svg {
+    font-size: 21px;
+    padding: 0 2px;
+    border: 1px solid #222239;
+    border-radius: 4px;
 
-    th {
-      font-weight: 300;
-      height: 40px;
-    }
-  }
-
-  tbody {
-    border: 1px solid #b3b8bd;
-    font-size: 13px !important;
-
-    td {
-      border-bottom: 1px solid #b3b8bd;
-      height: 40px;
-
-      svg {
-        font-size: 21px;
-        padding: 0 2px;
-        border: 1px solid #222239;
-        border-radius: 4px;
-
-        &:hover {
-          background: #f1f1f1;
-          cursor: pointer;
-        }
-      }
+    &:hover {
+      background: #f1f1f1;
+      cursor: pointer;
     }
   }
 
