@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 
-import { useField } from '@rocketseat/unform'
+import { useField } from '@unform/core'
 
 export default function ReactSelect({
   name,

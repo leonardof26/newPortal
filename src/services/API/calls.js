@@ -1,8 +1,44 @@
 import querystring from 'querystring'
 import api from '../api'
 
-const authBaseURL = 'Foursys.AuthProvider'
-const apiBaseURL = 'Foursys.API'
+const authBaseURL = 'Portal.AuthProvider'
+const apiBaseURL = 'Portal.API'
+
+export const activities = {
+  getActivities: () => {
+    return api.get(`${apiBaseURL}/api/Atividades`)
+  },
+}
+
+export const monthlyHour = {
+  getHours: (month, year) => {
+    return api.get(`${apiBaseURL}/api/HorasUteis/${month}/${year}`)
+  },
+}
+
+export const historyAppointment = {
+  getResources: () => {
+    return api.get(`${apiBaseURL}/api/Recurso/GetUsersWithAccess`)
+  },
+  getProjects: user => {
+    return api.get(`${apiBaseURL}/api/Projeto/GetByRecurso/${user}`)
+  },
+  getHistoryHours: ({ user, month, year }) => {
+    return api.get(`${apiBaseURL}/api/HorasHistorico/${user}/${month}/${year}`)
+  },
+  getLastUpdate: user => {
+    return api.get(
+      `${apiBaseURL}/api/HorasHistorico/GetUltimaAtualizacao/${user}`
+    )
+  },
+  AddHours: payload => {
+    return api.post(`${apiBaseURL}/api/HorasHistorico`, payload)
+  },
+  DeleteHours: payload => {
+    const string = querystring.stringify(payload)
+    return api.delete(`${apiBaseURL}/api/HorasHistorico?${string}`)
+  },
+}
 
 export const auth = {
   getToken: user => {

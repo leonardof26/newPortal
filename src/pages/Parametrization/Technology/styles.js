@@ -48,7 +48,7 @@ export const TechsTable = styled(Table)`
   margin-right: auto;
   width: 40%;
 
-  div {
+  /* div {
     border: 1px solid #222239;
     border-radius: 4px;
     height: 20px;
@@ -62,7 +62,7 @@ export const TechsTable = styled(Table)`
       background: #f1f1f1;
       cursor: pointer;
     }
-  }
+  } */
 
   tbody td,
   thead th {
@@ -76,7 +76,7 @@ export const TechsTable = styled(Table)`
     }
     &:nth-child(3) {
       width: 8%;
-      text-align: right;
+      text-align: center;
     }
   }
 `

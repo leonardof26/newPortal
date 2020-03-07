@@ -5,6 +5,8 @@ import Route from './route'
 import Login from '../pages/Login'
 import Main from '../pages/Main'
 
+import HistoryAppointment from '../pages/CCH/HistoryAppointment'
+
 import PricingList from '../pages/FoursysMenu/Pricing/List'
 import PricingEdit from '../pages/FoursysMenu/Pricing/Edit'
 
@@ -18,6 +20,8 @@ export default function Routes() {
     <Switch>
       <Route path="/" exact component={Main} />
       <Route path="/login" component={Login} />
+
+      <Route path="/cch" component={HistoryAppointment} />
 
       <Route path="/menufoursys/pricing" exact component={PricingList} />
       <Route path="/menufoursys/pricing/edit" exact component={PricingEdit} />

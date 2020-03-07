@@ -126,17 +126,17 @@ export default function MonthlyHour() {
 
       <Title>Parametrização: Quantidade Horas Mês</Title>
 
-      <CodeForm>
-        <p>Ano:</p>
-        <Select
-          name="year"
-          options={getSelectOpts()}
-          defaultValue={defaultSelect}
-          onChange={handleYearChange}
-        />
-      </CodeForm>
-
       <Form onSubmit={updateHours}>
+        <CodeForm>
+          <p>Ano:</p>
+          <Select
+            name="year"
+            options={getSelectOpts()}
+            defaultValue={defaultSelect}
+            onChange={handleYearChange}
+          />
+        </CodeForm>
+
         <YearTable>
           <thead>
             <tr>

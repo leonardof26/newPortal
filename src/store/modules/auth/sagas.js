@@ -41,7 +41,7 @@ export function setToken({ payload }) {
 }
 
 export function signOut() {
-  history.push('/#/')
+  history.push('/')
 }
 
 export function* refreshLogin({ payload }) {

@@ -50,18 +50,6 @@ export const RoleTable = styled(Table)`
   width: 60%;
   margin-bottom: 15px;
 
-  svg {
-    font-size: 21px;
-    padding: 0 2px;
-    border: 1px solid #222239;
-    border-radius: 4px;
-
-    &:hover {
-      background: #f1f1f1;
-      cursor: pointer;
-    }
-  }
-
   tbody td,
   thead th {
     &:nth-child(1) {

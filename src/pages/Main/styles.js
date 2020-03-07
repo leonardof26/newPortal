@@ -7,18 +7,22 @@ export const Container = styled.div`
   justify-content: center;
 
   .carousel {
-    width: ${props => (props.isIE ? '100%' : '-webkit-fill-available')};
+    width: 100%;
   }
 
   .carousel-inner img {
     width: 100%;
-    height: 370px;
+    height: 59vh !important;
+  }
+  .carousel-item.active,
+  .carousel-item .view {
+    height: 59vh !important;
   }
 `
 
 export const BoxContainer = styled.ul`
   margin: 0;
-  padding: 20px;
+  padding: 20px 0 20px 40px;
   margin: 0 auto;
   flex-wrap: wrap;
   display: flex;

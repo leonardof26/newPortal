@@ -69,7 +69,7 @@ export default function List() {
           <tr>
             <td>6322</td>
             <td>
-              <Link to="/">CBON - IN3289406 Ajustar Expurgo banco</Link>
+              <Link to="/cch">CBON - IN3289406 Ajustar Expurgo banco</Link>
             </td>
             <td>Bradesco</td>
             <td>Viviane de Oliveira</td>

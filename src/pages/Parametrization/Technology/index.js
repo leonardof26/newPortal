@@ -164,14 +164,11 @@ export default function Tecnology() {
                 </td>
                 <td>{tech.dsTecnologia}</td>
                 <td>
-                  <div>
-                    <FaRegTrashAlt
-                      size={14}
-                      onClick={() => {
-                        handleDeletePress(tech)
-                      }}
-                    />
-                  </div>
+                  <FaRegTrashAlt
+                    onClick={() => {
+                      handleDeletePress(tech)
+                    }}
+                  />
                 </td>
               </tr>
             ))}

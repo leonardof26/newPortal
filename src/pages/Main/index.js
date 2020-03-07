@@ -18,9 +18,10 @@ import { Container, Box, BoxContainer } from './styles'
 
 export default function Main() {
   const isIE = /* @cc_on!@ */ false || !!document.documentMode
+  const screenHeight = window.innerHeight
 
   return (
-    <Container isIE={isIE}>
+    <Container isIE={isIE} screenHeight={screenHeight}>
       <div id="demo" className="carousel slide" data-ride="carousel">
         <ul className="carousel-indicators">
           <li data-target="#demo" data-slide-to="0" className="active" />

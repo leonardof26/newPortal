@@ -10,6 +10,9 @@ import {
   signOutRequest,
 } from '../store/modules/auth/actions'
 
+let isRefreshing = false
+let subscribers = []
+
 async function checkTokenExpired() {
   const { tokenExpirationDate } = store.getState().auth
 
@@ -46,25 +49,69 @@ async function refreshLogin(payload) {
   }
 }
 
-api.interceptors.request.use(async config => {
-  if (!config.url.includes('Token')) {
-    await checkTokenExpired(config)
-  }
+function onRrefreshed(token) {
+  subscribers.map(sub => sub(token))
+}
 
-  const { token } = store.getState().auth
+function addSubscriber(callback) {
+  subscribers.push(callback)
+}
 
-  config.headers.Authorization = `Bearer ${token}`
-
-  return config
-})
-
-// api.interceptors.response.use(
-//   response => {
-//     return response
-//   },
-//   error => {
-//     if (error.response.status !== 401) {
-//       return Promise.reject(error)
-//     }
+// api.interceptors.request.use(async config => {
+//   if (!config.url.includes('Token')) {
+//     await checkTokenExpired(config)
 //   }
-// )
+
+//   const { token } = store.getState().auth
+
+//   config.headers.Authorization = `Bearer ${token}`
+
+//   return config
+// })
+
+api.interceptors.response.use(
+  response => {
+    return response
+  },
+  async error => {
+    const {
+      config,
+      response: { status },
+    } = error
+    const originalRequest = config
+
+    if (status !== 401) {
+      return Promise.reject(error)
+    }
+
+    if (!isRefreshing) {
+      isRefreshing = true
+
+      const { token, refreshToken } = store.getState().auth
+      await refreshLogin({ token, refreshToken })
+
+      const { token: newToken } = store.getState().auth
+
+      isRefreshing = false
+
+      onRrefreshed(newToken)
+
+      subscribers = []
+
+      originalRequest.headers.Authorization = `Bearer ${newToken}`
+      return api.request(originalRequest)
+    }
+
+    const retryOriginalRequest = new Promise(resolve => {
+      addSubscriber(token => {
+        originalRequest.headers.Authorization = `Bearer ${token}`
+        resolve(api.request(originalRequest))
+      })
+    })
+    return retryOriginalRequest
+
+    // config.headers.Authorization = `Bearer ${newToken}`
+
+    return api.request(originalRequest)
+  }
+)
