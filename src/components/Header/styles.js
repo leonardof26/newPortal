@@ -22,6 +22,10 @@ export const Content = styled.div`
     align-items: center;
     align-content: center;
 
+    a:hover {
+      text-decoration: none;
+    }
+
     img {
       max-height: 25px;
 
@@ -139,7 +143,7 @@ export const DropDownExit = styled.div`
       content: '';
       position: absolute;
       left: 70%;
-      top: -7px;
+      top: -10px;
       width: 0;
       height: 0;
       border-left: 10px solid transparent;

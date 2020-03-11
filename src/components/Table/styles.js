@@ -5,6 +5,10 @@ export const Container = styled.table`
   border-collapse: collapse;
   margin-bottom: 15px;
 
+  .garbage {
+    padding: 0 3px !important;
+  }
+
   svg {
     font-size: 21px;
     padding: 0 2px;

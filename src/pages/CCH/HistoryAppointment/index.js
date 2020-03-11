@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
+import * as Yup from 'yup'
 import ids from 'short-id'
 import { toast } from 'react-toastify'
 import { format, parseISO } from 'date-fns'
@@ -18,7 +19,7 @@ import {
   historyAppointment,
 } from '../../../services/API/calls'
 
-import MaskInput from '../../../components/Unform/MaskInput'
+import Input from '../../../components/Input'
 import Title from '../../../components/Title'
 import Button from '../../../components/Button'
 
@@ -54,7 +55,49 @@ export default function HistoryAppointment() {
     return { label: proj.nmProjeto, value: proj.cdProjeto }
   })
 
+  const schema = Yup.object().shape({
+    name: Yup.object().required(),
+    selectedProj: Yup.object().required(),
+  })
+
+  const formRef = useRef(null)
+
   registerLocale('pt', pt)
+
+  function isNumeric(hourTxt) {
+    const re = /^[0-9\b]+$/
+    const cleanTxt = hourTxt.split(':').join('')
+    return re.test(cleanTxt)
+  }
+
+  function formatHour(txt) {
+    if (txt.indexOf(':') !== -1) {
+      const [hour, minut] = txt.split(':')
+
+      if (minut.length === 1) {
+        return txt.length > 3
+          ? `${hour.substring(0, hour.length - 1)}:${hour.substring(
+              hour.length - 1
+            )}${minut}`
+          : `${hour + minut}`
+      }
+
+      return `${hour}${minut.substring(0, 1)}:${minut.substring(1, 3)}`
+    }
+
+    return txt.length < 3
+      ? txt
+      : `${txt.substring(0, 1)}:${txt.substring(1, 3)}`
+  }
+
+  function padToTwo(num) {
+    return num < 10 ? `0${num}` : num
+  }
+
+  function checkHours(hour) {
+    const [, min] = hour.split(':')
+    return !Number.isNaN(min) && min < 60
+  }
 
   async function getMonthHours() {
     const month = period.getMonth() + 1
@@ -109,13 +152,14 @@ export default function HistoryAppointment() {
     resp.data.map(reg => {
       const [hours, mins] = reg.qtHorasTrabalhadas.split(':')
       totalHours += parseInt(mins, 10) + parseInt(hours, 10) * 60
+      return reg
     })
 
     const hour = totalHours / 60
     const rhour = Math.floor(hour)
     const minutes = Math.floor((hour - rhour) * 60)
 
-    setTotalHour(`${rhour}:${minutes}`)
+    setTotalHour(`${padToTwo(rhour)}:${padToTwo(minutes)}`)
 
     setHourList(resp.data)
   }
@@ -133,9 +177,9 @@ export default function HistoryAppointment() {
 
   async function handleInitialData() {
     setLoading(true)
-    getMonthHours()
-    getNames()
-    getActivities()
+    await getMonthHours()
+    await getNames()
+    await getActivities()
     setLoading(false)
   }
 
@@ -152,18 +196,28 @@ export default function HistoryAppointment() {
   }
 
   async function handleSUbmit(data) {
-    const payload = {
-      cdProfissional: data.name.value,
-      cdProjeto: data.project.value,
-      cdDivisao: projectList.find(proj => proj.cdProjeto === data.project.value)
-        .cdDivisao,
-      cdAtividade: selectedAct.value,
-      Mes: period.getMonth() + 1,
-      Ano: period.getFullYear(),
-      QuantidadeHoras: data.hours,
+    if (!checkHours(data.hours)) {
+      toast.error('Erro ao incluir Horas')
+      return
     }
 
+    setLoading(true)
+
     try {
+      await schema.validate({ ...data, selectedProj }, { abortEarly: false })
+
+      const payload = {
+        cdProfissional: data.name.value,
+        cdProjeto: selectedProj.value,
+        cdDivisao: projectList.find(
+          proj => proj.cdProjeto === selectedProj.value
+        ).cdDivisao,
+        cdAtividade: selectedAct.value,
+        Mes: period.getMonth() + 1,
+        Ano: period.getFullYear(),
+        QuantidadeHoras: data.hours,
+      }
+
       await historyAppointment.AddHours(payload)
       toast.success('Horas Incluidas com sucesso')
       await getHours()
@@ -176,7 +230,26 @@ export default function HistoryAppointment() {
       })
       setHoursInp('')
     } catch (error) {
+      const validationErrors = {}
+
+      if (error instanceof Yup.ValidationError) {
+        error.inner.forEach(err => {
+          validationErrors[err.path] = err.message
+        })
+
+        formRef.current.setErrors(validationErrors)
+      }
+
+      if (error.response) {
+        if (error.response.data.codErro === 1001) {
+          toast.warn(error.response.data.descricaoErro, { autoClose: 150000 })
+          return
+        }
+      }
+
       toast.error('Erro ao incluir Horas')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -189,6 +262,8 @@ export default function HistoryAppointment() {
       cdAtividade: reg.cdAtividade,
     }
 
+    setLoading(true)
+
     try {
       await historyAppointment.DeleteHours(payload)
 
@@ -197,6 +272,8 @@ export default function HistoryAppointment() {
       await getLastAppoint()
     } catch (error) {
       toast.error('Erro ao excluir as horas do recurso')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -204,6 +281,17 @@ export default function HistoryAppointment() {
     setSelectedProj({ label: reg.nmProjeto, value: reg.cdProjeto })
     setSelectedAct({ label: reg.nmAtividade, value: reg.cdAtividade })
     setHoursInp(reg.qtHorasTrabalhadas)
+  }
+
+  function handleInputChange(e) {
+    e.persist()
+
+    const formattedHour = formatHour(e.target.value)
+    const inputValid = isNumeric(formattedHour)
+
+    if (e.target.value === '' || inputValid) {
+      setHoursInp(formattedHour)
+    }
   }
 
   useEffect(() => {
@@ -227,7 +315,7 @@ export default function HistoryAppointment() {
     <Container>
       {loading && <LoadingPage />}
       <Title>Horas por Histórico</Title>
-      <Form onSubmit={handleSUbmit}>
+      <Form onSubmit={handleSUbmit} ref={formRef}>
         <HourInfo>
           <div>
             <p>Vigência:</p>
@@ -241,7 +329,7 @@ export default function HistoryAppointment() {
           </div>
           <div className="hourMonth">
             <p>Horas do Mês:</p>
-            <p>{monthHours}:00</p>
+            <p>{monthHours || '00'}:00</p>
           </div>
         </HourInfo>
         <EmployeeInfo>
@@ -273,13 +361,14 @@ export default function HistoryAppointment() {
           </div>
           <div>
             <p>Horas:</p>
-            <MaskInput
+            <Input
               name="hours"
               type="text"
-              onChange={target => setHoursInp(target.value)}
+              onChange={e => handleInputChange(e)}
               value={hoursInp}
               autoComplete="off"
-              format="###:##"
+              maxLength={6}
+              error={!checkHours(hoursInp)}
             />
           </div>
           <Button type="submit">Salvar</Button>

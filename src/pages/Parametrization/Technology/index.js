@@ -48,6 +48,7 @@ export default function Tecnology() {
   }, [])// eslint-disable-line
 
   async function handleSubmit(data, { reset }) {
+    setLoading(true)
     try {
       await schema.validate(data, { abortEarly: false })
 
@@ -72,10 +73,13 @@ export default function Tecnology() {
       }
 
       toast.error('Falha ao incluir tecnologia')
+    } finally {
+      setLoading(false)
     }
   }
 
   async function toggleStatus(tech, index) {
+    setLoading(true)
     const { cdTecnologia, ativo } = tech
     try {
       await technology.updateTechnology({
@@ -88,6 +92,8 @@ export default function Tecnology() {
       })
     } catch (error) {
       toast.error('Erro ao atualizar tecnologia')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -95,6 +101,7 @@ export default function Tecnology() {
     setShowConfirm(false)
 
     if (confirm) {
+      setLoading(true)
       try {
         await technology.deleteTechnology(selectedTech)
 
@@ -107,11 +114,15 @@ export default function Tecnology() {
         ) {
           toast.warn(
             'Não foi possivel excluir a tecnologia devido a mesma estar vinculada com algum projeto',
-            { autoClose: 15000 }
+            {
+              autoClose: 1500,
+            }
           )
           return
         }
         toast.error('Erro ao excluir tecnologia')
+      } finally {
+        setLoading(false)
       }
     }
   }
@@ -165,6 +176,7 @@ export default function Tecnology() {
                 <td>{tech.dsTecnologia}</td>
                 <td>
                   <FaRegTrashAlt
+                    className="garbage"
                     onClick={() => {
                       handleDeletePress(tech)
                     }}

@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components'
 
-import ReactSelect from '../../../components/Unform/ReactSelect'
+import ReactSelect from 'react-select'
 import MaskInput from '../../../components/Unform/MaskInput'
 
 const rotate = keyframes`

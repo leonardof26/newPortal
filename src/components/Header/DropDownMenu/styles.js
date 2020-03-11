@@ -18,8 +18,7 @@ export const Container = styled.div`
 
 export const Menu = styled.div`
   .teste {
-    padding: 6px;
-    /* padding: ${props => (props.currentPage ? '6px' : 0)}; */
+    padding: 3px 10px;
     background: ${props => (props.currentPage ? '#fff' : '#222239')};
     border-radius: ${props => (props.currentPage ? '4px' : 0)};
   }

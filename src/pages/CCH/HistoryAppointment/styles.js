@@ -73,7 +73,6 @@ export const Select = styled(ReactSelect)`
   .css-1pahdxg-control {
     min-height: 32px;
     height: 32px;
-    position: initial;
   }
   .css-tlfecz-indicatorContainer,
   .css-1gtu0rj-indicatorContainer {
@@ -93,6 +92,10 @@ export const ActivitiesTable = styled(ScrollableTable)`
     :disabled {
       background: #eee;
     }
+
+    :last-child {
+      margin-left: 10px;
+    }
   }
 
   tbody td,
@@ -100,7 +103,7 @@ export const ActivitiesTable = styled(ScrollableTable)`
     &:nth-child(1) {
       width: 30%;
       float: left;
-      padding-left: 5px;
+      padding-left: 15px;
     }
     &:nth-child(2) {
       width: 25%;

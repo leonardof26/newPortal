@@ -62,10 +62,6 @@ export default function BradescoProfile() {
     getClients()
   }, [])// eslint-disable-line
 
-  useEffect(() => {
-    getProfileList()
-  }, [client])// eslint-disable-line
-
   async function getProfileList() {
     if (client === '') {
       return
@@ -84,6 +80,10 @@ export default function BradescoProfile() {
     setLoading(false)
   }
 
+  useEffect(() => {
+    getProfileList()
+  }, [client])// eslint-disable-line
+
   function handleCancel() {
     setEditing(false)
     setPerfilName('')
@@ -91,6 +91,7 @@ export default function BradescoProfile() {
   }
 
   async function registerProfile(data) {
+    setLoading(true)
     if (editing) {
       const profile = {
         cdPerfil: selectedProfile.cdPerfil,
@@ -143,6 +144,8 @@ export default function BradescoProfile() {
 
         toast.error('Erro ao cadastrar Perfil')
         return
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -201,7 +204,7 @@ export default function BradescoProfile() {
             />
           </div>
           <div>
-            <p>Custo Hora:</p>
+            <p>Preço Hora:</p>
             <MaskInput
               name="price"
               prefix="R$"
@@ -229,7 +232,7 @@ export default function BradescoProfile() {
           <tr>
             <th>Código</th>
             <th>Perfil</th>
-            <th>Custo Médio</th>
+            <th>Preço Hora</th>
             <th>Ações</th>
           </tr>
         </thead>

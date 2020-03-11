@@ -12,19 +12,16 @@ import {
 
 let isRefreshing = false
 let subscribers = []
+const beforeReq = false
+let afterReq = false
 
-async function checkTokenExpired() {
+async function TokenExpired() {
   const { tokenExpirationDate } = store.getState().auth
 
-  if (
-    isAfter(
-      Math.round(new Date().getTime() / 1000),
-      new Date(tokenExpirationDate)
-    )
-  ) {
-    const { token, refreshToken } = store.getState().auth
-    await refreshLogin({ token, refreshToken })
-  }
+  return isAfter(
+    Math.round(new Date().getTime() / 1000),
+    new Date(tokenExpirationDate)
+  )
 }
 
 async function refreshLogin(payload) {
@@ -45,7 +42,7 @@ async function refreshLogin(payload) {
       signInSuccess(token, refreshToken, tokenExpirationDate, user)
     )
   } catch (error) {
-    await store.dispatch(signOutRequest())
+    return error
   }
 }
 
@@ -58,15 +55,47 @@ function addSubscriber(callback) {
 }
 
 // api.interceptors.request.use(async config => {
-//   if (!config.url.includes('Token')) {
-//     await checkTokenExpired(config)
-//   }
-
-//   const { token } = store.getState().auth
-
-//   config.headers.Authorization = `Bearer ${token}`
+//   console.log(config.headers.Authorization)
 
 //   return config
+// })
+// api.interceptors.request.use(async config => {
+//   if (config.url.includes('Token') || afterReq || !TokenExpired()) {
+//     return config
+//   }
+
+//   if (!isRefreshing) {
+//     isRefreshing = true
+
+//     try {
+//       const { token, refreshToken } = store.getState().auth
+//       await refreshLogin({ token, refreshToken })
+//     } catch (error) {
+//       isRefreshing = false
+//       subscribers = []
+//       store.dispatch(signOutRequest())
+//       return Promise.reject(error)
+//     }
+
+//     isRefreshing = false
+
+//     const { token: newToken } = store.getState().auth
+
+//     onRrefreshed(newToken)
+
+//     subscribers = []
+
+//     config.headers.Authorization = `Bearer ${newToken}`
+//     return config
+//   }
+
+//   const retryOriginalRequest = new Promise(resolve => {
+//     addSubscriber(token => {
+//       config.headers.Authorization = `Bearer ${token}`
+//       resolve(api.request(config))
+//     })
+//   })
+//   return retryOriginalRequest
 // })
 
 api.interceptors.response.use(
@@ -80,19 +109,28 @@ api.interceptors.response.use(
     } = error
     const originalRequest = config
 
-    if (status !== 401) {
+    if (status !== 401 || config.url.indexOf('Auth/Token') !== -1) {
       return Promise.reject(error)
     }
 
     if (!isRefreshing) {
       isRefreshing = true
+      afterReq = true
 
-      const { token, refreshToken } = store.getState().auth
-      await refreshLogin({ token, refreshToken })
-
-      const { token: newToken } = store.getState().auth
+      try {
+        const { token, refreshToken } = store.getState().auth
+        await refreshLogin({ token, refreshToken })
+      } catch (_) {
+        isRefreshing = false
+        subscribers = []
+        store.dispatch(signOutRequest())
+        return Promise.reject(error)
+      }
 
       isRefreshing = false
+      afterReq = false
+
+      const { token: newToken } = store.getState().auth
 
       onRrefreshed(newToken)
 
@@ -109,9 +147,5 @@ api.interceptors.response.use(
       })
     })
     return retryOriginalRequest
-
-    // config.headers.Authorization = `Bearer ${newToken}`
-
-    return api.request(originalRequest)
   }
 )

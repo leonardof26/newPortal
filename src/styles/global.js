@@ -6,6 +6,10 @@ import 'react-datepicker/dist/react-datepicker.css'
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
+  .Toastify__toast--warning{
+    background: #7159c1;
+  }
+
   *{
     margin: 0;
     padding: 0;

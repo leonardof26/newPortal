@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useImmer } from 'use-immer'
 
 import { Form } from '@unform/web'
@@ -63,6 +63,7 @@ export default function MonthlyHour() {
       draft[11] = ''
       resp.data.map(month => {
         draft[month.dtMesReferencia - 1] = month.qtHorasUteis
+        return month
       })
     })
 
@@ -79,7 +80,7 @@ export default function MonthlyHour() {
 
   function getSelectOpts() {
     const options = []
-    for (let i = new Date().getFullYear() + 1; i >= 2000; i--) {
+    for (let i = new Date().getFullYear() + 1; i >= 2000; i -= 1) {
       options.push({ label: i, value: i })
     }
 
@@ -95,6 +96,8 @@ export default function MonthlyHour() {
   }
 
   async function updateHours(data) {
+    setLoading(true)
+
     const payload = Object.values(data)
       .map((hours, index) => {
         if (hours !== '') {
@@ -118,6 +121,8 @@ export default function MonthlyHour() {
     }
 
     getHours()
+
+    setLoading(false)
   }
 
   return (
@@ -175,7 +180,7 @@ export default function MonthlyHour() {
         </YearTable>
 
         <BottomScreen>
-          <a />
+          <span />
           <Button type="submit" darken big>
             Atualizar
           </Button>

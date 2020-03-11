@@ -1,5 +1,20 @@
 const menus = [
   {
+    title: 'CCH',
+    id: 'cch',
+    itens: [
+      {
+        header: '',
+        menus: [
+          {
+            link: { type: 'link', url: '/cch/historyAppointment' },
+            title: 'Horas por Histórico',
+          },
+        ],
+      },
+    ],
+  },
+  {
     title: 'Menu Foursys',
     id: 'menufoursys',
     itens: [

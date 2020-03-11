@@ -37,8 +37,6 @@ export default function Header({ path }) {
     dispatch(signOutRequest())
   }
 
-  console.log(new Date().getHours())
-
   return (
     <Container>
       <Content>
@@ -46,7 +44,9 @@ export default function Header({ path }) {
           <Link to="/">
             <img src={logo} alt="Foursys" />
           </Link>
-          <h1>Portal Foursys</h1>
+          <Link to="/">
+            <h1>Portal Foursys</h1>
+          </Link>
 
           {signed &&
             menus.map(item => {
@@ -72,16 +72,16 @@ export default function Header({ path }) {
               <strong>{userName}!</strong>
             </div>
 
-            <div className="userButton">
-              <UserButton>
+            <UserButton>
+              <div className="userButton">
                 {nameInitials}
                 <DropDownExit>
                   <button type="button" onClick={handleLogout}>
                     Sair
                   </button>
                 </DropDownExit>
-              </UserButton>
-            </div>
+              </div>
+            </UserButton>
           </Profile>
         ) : (
           <Link to="/login" className="loginButton">

@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import Select from 'react-select'
 
 import { useField } from '@unform/core'
+import { Container } from './styles'
 
 export default function ReactSelect({
   name,
@@ -39,7 +39,8 @@ export default function ReactSelect({
     <>
       {label && <label htmlFor={fieldName}>{label}</label>}
 
-      <Select
+      <Container
+        error={error}
         name={fieldName}
         aria-label={fieldName}
         options={options}

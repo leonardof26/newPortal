@@ -21,7 +21,7 @@ export default function Routes() {
       <Route path="/" exact component={Main} />
       <Route path="/login" component={Login} />
 
-      <Route path="/cch" component={HistoryAppointment} />
+      <Route path="/cch/historyAppointment" component={HistoryAppointment} />
 
       <Route path="/menufoursys/pricing" exact component={PricingList} />
       <Route path="/menufoursys/pricing/edit" exact component={PricingEdit} />

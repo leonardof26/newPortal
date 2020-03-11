@@ -15,7 +15,6 @@ export const Container = styled.table`
     padding: 0 2px;
     border: 1px solid #222239;
     border-radius: 4px;
-    margin-right: 2px;
 
     &:hover {
       background: #222239;

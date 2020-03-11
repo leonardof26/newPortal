@@ -26,10 +26,6 @@ export default function Roles() {
 
   const formRef = useRef(null)
 
-  useEffect(() => {
-    getRolesList()
-  }, [])
-
   async function getRolesList() {
     setLoading(true)
 
@@ -45,6 +41,10 @@ export default function Roles() {
     setLoading(false)
   }
 
+  useEffect(() => {
+    getRolesList()
+  }, [])
+
   const schema = Yup.object().shape({
     name: Yup.string().required('Favor informar cargo'),
     price: Yup.number()
@@ -59,6 +59,7 @@ export default function Roles() {
   }
 
   async function registerRole(data) {
+    setLoading(true)
     if (editing) {
       const role = {
         cdCargo: selectedRole,
@@ -86,6 +87,8 @@ export default function Roles() {
 
         toast.error('Erro ao atualizar Cargo')
         return
+      } finally {
+        setLoading(false)
       }
     } else {
       const role = {
@@ -113,6 +116,8 @@ export default function Roles() {
 
         toast.error('Erro ao cadastrar Perfil')
         return
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -151,7 +156,7 @@ export default function Roles() {
             />
           </div>
           <div>
-            <p>Custo Médio Hora:</p>
+            <p>Valor Médio Hora:</p>
             <MaskInput
               name="price"
               prefix="R$"
@@ -179,7 +184,7 @@ export default function Roles() {
           <tr>
             <th>Código</th>
             <th>Cargo</th>
-            <th>Custo Médio</th>
+            <th>Valor Médio</th>
             <th>Ações</th>
           </tr>
         </thead>
