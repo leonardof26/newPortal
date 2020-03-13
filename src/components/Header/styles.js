@@ -21,8 +21,7 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     align-content: center;
-
-    a:hover {
+    > a:hover {
       text-decoration: none;
     }
 

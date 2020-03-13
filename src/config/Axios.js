@@ -13,9 +13,9 @@ import {
 let isRefreshing = false
 let subscribers = []
 const beforeReq = false
-let afterReq = false
+const afterReq = false
 
-async function TokenExpired() {
+function TokenExpired() {
   const { tokenExpirationDate } = store.getState().auth
 
   return isAfter(
@@ -25,28 +25,25 @@ async function TokenExpired() {
 }
 
 async function refreshLogin(payload) {
-  try {
-    const response = await auth.refreshToken(payload)
+  const response = await auth.refreshToken(payload)
 
-    const { token, refreshToken } = response.data
+  const { token, refreshToken } = response.data
 
-    api.defaults.headers.Authorization = `Bearer ${token}`
+  api.defaults.headers.Authorization = `Bearer ${token}`
 
-    const [firstName, lastName] = jwt.decode(token).given_name.split(' ')
+  const [firstName, lastName] = jwt.decode(token).given_name.split(' ')
 
-    const tokenExpirationDate = jwt.decode(token).exp
+  const tokenExpirationDate = jwt.decode(token).exp
 
-    const user = { firstName, lastName }
+  const user = { firstName, lastName }
 
-    await store.dispatch(
-      signInSuccess(token, refreshToken, tokenExpirationDate, user)
-    )
-  } catch (error) {
-    return error
-  }
+  await store.dispatch(
+    signInSuccess(token, refreshToken, tokenExpirationDate, user)
+  )
 }
 
 function onRrefreshed(token) {
+  console.log('cccc')
   subscribers.map(sub => sub(token))
 }
 
@@ -54,13 +51,13 @@ function addSubscriber(callback) {
   subscribers.push(callback)
 }
 
-// api.interceptors.request.use(async config => {
-//   console.log(config.headers.Authorization)
-
-//   return config
-// })
-// api.interceptors.request.use(async config => {
-//   if (config.url.includes('Token') || afterReq || !TokenExpired()) {
+// api.interceptors.request.use(async (config, ...rest) => {
+//   console.log(subscribers)
+//   console.log(config)
+//   console.log(rest)
+//   console.log(config.url.includes('Token'))
+//   console.log(TokenExpired())
+//   if (config.url.includes('Token') || !TokenExpired()) {
 //     return config
 //   }
 
@@ -81,11 +78,14 @@ function addSubscriber(callback) {
 
 //     const { token: newToken } = store.getState().auth
 
+//     console.log('dddd')
+
 //     onRrefreshed(newToken)
 
 //     subscribers = []
 
 //     config.headers.Authorization = `Bearer ${newToken}`
+//     console.log('aaaa')
 //     return config
 //   }
 
@@ -103,6 +103,9 @@ api.interceptors.response.use(
     return response
   },
   async error => {
+    if (!error.response) {
+      return Promise.reject(error)
+    }
     const {
       config,
       response: { status },
@@ -112,10 +115,10 @@ api.interceptors.response.use(
     if (status !== 401 || config.url.indexOf('Auth/Token') !== -1) {
       return Promise.reject(error)
     }
+    console.log(subscribers)
 
     if (!isRefreshing) {
       isRefreshing = true
-      afterReq = true
 
       try {
         const { token, refreshToken } = store.getState().auth
@@ -128,7 +131,6 @@ api.interceptors.response.use(
       }
 
       isRefreshing = false
-      afterReq = false
 
       const { token: newToken } = store.getState().auth
 
@@ -141,6 +143,7 @@ api.interceptors.response.use(
     }
 
     const retryOriginalRequest = new Promise(resolve => {
+      console.log(originalRequest)
       addSubscriber(token => {
         originalRequest.headers.Authorization = `Bearer ${token}`
         resolve(api.request(originalRequest))

@@ -25,6 +25,10 @@ const menus = [
             link: { type: 'link', url: '/menufoursys/pricing' },
             title: 'Precificação',
           },
+          {
+            link: { type: 'link', url: '/menufoursys/alocation' },
+            title: 'Mapa de Alocação',
+          },
         ],
       },
     ],

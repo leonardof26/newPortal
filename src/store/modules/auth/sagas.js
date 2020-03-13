@@ -60,6 +60,7 @@ export function* refreshLogin({ payload }) {
 
     yield put(signInSuccess(token, refreshToken, tokenExpirationDate, user))
   } catch (error) {
+    console.log('logout')
     yield put(signOutRequest())
   }
 }

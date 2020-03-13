@@ -8,11 +8,11 @@ export const Container = styled.div`
   }
 
   @media (min-width: 1000px) and (max-width: 1200px) {
-    padding: 5px 5px;
+    padding: 14px 5px;
   }
 
   @media (min-width: 1px) and (max-width: 1000px) {
-    padding: 5px 1px;
+    padding: 14px 1px;
   }
 `
 

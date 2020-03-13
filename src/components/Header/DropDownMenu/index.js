@@ -30,10 +30,10 @@ export default function DropDownMenu({
 
   return (
     <Container
-      currentPage={path.indexOf(menuID.toLowerCase()) !== -1}
+      // currentPage={path.indexOf(menuID.toLowerCase()) !== -1}
       key={keyValue}
     >
-      <Menu currentPage={path.indexOf(menuID.toLowerCase()) !== -1}>
+      <Menu>
         <div className="teste">
           <span>{menuTitle}</span>
           <i />
