@@ -1,5 +1,5 @@
 import querystring from 'querystring'
-import api from '../api'
+import api from './index'
 
 const authBaseURL = 'Portal.AuthProvider'
 const apiBaseURL = 'Portal.API'

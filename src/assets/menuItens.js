@@ -7,6 +7,10 @@ const menus = [
         header: '',
         menus: [
           {
+            link: { type: 'link', url: '/cch/hourAppointment' },
+            title: 'Lançamento de Horas',
+          },
+          {
             link: { type: 'link', url: '/cch/historyAppointment' },
             title: 'Horas por Histórico',
           },

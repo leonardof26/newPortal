@@ -7,6 +7,7 @@ export const Container = styled.div`
 `
 
 export const TopInfo = styled.div`
+  margin-top: 30px;
   display: flex;
   align-content: center;
   align-items: center;
@@ -15,6 +16,8 @@ export const TopInfo = styled.div`
 
 export const TotalHours = styled.div`
   display: flex;
+  position: absolute;
+  left: calc(50% - 225px);
 
   > div {
     display: flex;
@@ -35,7 +38,32 @@ export const TotalHours = styled.div`
   }
 `
 
+export const PeriodOpts = styled.div`
+margin-top: 20px;
+  display: flex;
+  align-content: flex-end;
+  align-items: flex-end;
+
+  p {
+    margin-bottom: 5px;
+  }
+
+  > div {
+    width: 25%;
+    margin-right: 50px;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .react-datepicker-wrapper {
+    width: 100%;h
+  }
+`
+
 export const TableDiv = styled.div`
+  margin-top: 50px;
   overflow-x: auto;
 `
 

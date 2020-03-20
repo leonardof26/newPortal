@@ -53,7 +53,7 @@ export const ProjectsTable = styled(Table)`
       text-align: left;
     }
     &:nth-child(3) {
-      width: 15%;
+      width: 13%;
       text-align: left;
     }
     &:nth-child(4) {
@@ -61,15 +61,19 @@ export const ProjectsTable = styled(Table)`
       text-align: left;
     }
     &:nth-child(5) {
-      width: 10%;
+      width: 9%;
       text-align: center;
     }
     &:nth-child(6) {
-      width: 15%;
+      width: 14%;
       text-align: left;
     }
     &:nth-child(7) {
-      width: 10%;
+      width: 9%;
+      text-align: center;
+    }
+    &:nth-child(8) {
+      width: 5%;
       text-align: center;
     }
   }

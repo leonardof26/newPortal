@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 
 import { signInSuccess, signFailure, signOutRequest } from './actions'
 
-import api from '../../../services/api'
+import api from '../../../services/API/index'
 import history from '../../../services/history'
 
 import { auth } from '../../../services/API/calls'
@@ -60,7 +60,6 @@ export function* refreshLogin({ payload }) {
 
     yield put(signInSuccess(token, refreshToken, tokenExpirationDate, user))
   } catch (error) {
-    console.log('logout')
     yield put(signOutRequest())
   }
 }

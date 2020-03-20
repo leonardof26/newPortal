@@ -1,6 +1,6 @@
 import { isAfter } from 'date-fns'
 import jwt from 'jsonwebtoken'
-import api from '../services/api'
+import api from '../services/API/index'
 import { auth } from '../services/API/calls'
 
 import { store } from '../store'

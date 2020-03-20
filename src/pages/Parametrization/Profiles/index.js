@@ -17,15 +17,6 @@ import { saleProfiles } from '../../../services/API/calls'
 
 import { Container, FormSelect, TopForm, ProfileTable, Select } from './styles'
 
-const customStyles = {
-  control: base => ({
-    ...base,
-    height: 32,
-    minHeight: 32,
-    position: 'initial',
-  }),
-}
-
 export default function BradescoProfile() {
   const [perfilList, setPerfilList] = useState([])
   const [client, setClient] = useState('')
@@ -187,7 +178,6 @@ export default function BradescoProfile() {
             options={clientList}
             onChange={handleChangeOption}
             isDisabled={editing}
-            styles={customStyles}
             width="200px"
             height="10px"
             min-height="10px"

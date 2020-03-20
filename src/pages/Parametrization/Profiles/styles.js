@@ -78,9 +78,4 @@ export const ProfileTable = styled(Table)`
     }
   }
 `
-export const Select = styled(ReactSelect)`
-  .css-tlfecz-indicatorContainer,
-  .css-1gtu0rj-indicatorContainer {
-    padding: 5px 8px;
-  }
-`
+export const Select = styled(ReactSelect)``

@@ -2,12 +2,18 @@ import styled from 'styled-components'
 
 export const Container = styled.table`
   .NoRegisters {
-    text-align: center;
+    justify-content: center;
     width: 100% !important;
   }
 
   .garbage {
     padding: 0 3px !important;
+  }
+
+  .hourInput {
+    width: 70px;
+    height: 27px;
+    text-align: right;
   }
 
   svg {
@@ -25,10 +31,17 @@ export const Container = styled.table`
 
   thead,
   tbody,
-  tr,
+  tr {
+    display: block;
+  }
+
   td,
   th {
-    display: block;
+    display: flex;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    height: 40px;
   }
 
   tr:after {
@@ -46,7 +59,6 @@ export const Container = styled.table`
 
     th {
       font-weight: 300;
-      padding: 10px 0;
     }
   }
 
@@ -71,7 +83,6 @@ export const Container = styled.table`
 
       td {
         font-size: 13px !important;
-        padding: 10px 0;
       }
     }
   }

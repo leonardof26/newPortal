@@ -9,6 +9,12 @@ export const Container = styled.table`
     padding: 0 3px !important;
   }
 
+  .hourInput {
+    width: 70px;
+    height: 27px;
+    text-align: right;
+  }
+
   svg {
     font-size: 21px;
     padding: 0 2px;

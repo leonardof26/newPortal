@@ -5,9 +5,10 @@ import Route from './route'
 import Login from '../pages/Login'
 import Main from '../pages/Main'
 
+import HourAppointment from '../pages/CCH/HourAppointment'
 import HistoryAppointment from '../pages/CCH/HistoryAppointment'
 
-import AlocationList from '../pages/FoursysMenu/AlocationMap'
+import AlocationList from '../pages/FoursysMenu/AlocationMap/List'
 import AlocationEdit from '../pages/FoursysMenu/AlocationMap/Edit'
 import PricingList from '../pages/FoursysMenu/Pricing/List'
 import PricingEdit from '../pages/FoursysMenu/Pricing/Edit'
@@ -23,6 +24,7 @@ export default function Routes() {
       <Route path="/" exact component={Main} />
       <Route path="/login" component={Login} />
 
+      <Route path="/cch/hourAppointment" component={HourAppointment} />
       <Route path="/cch/historyAppointment" component={HistoryAppointment} />
 
       <Route path="/menufoursys/alocation" exact component={AlocationList} />

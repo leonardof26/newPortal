@@ -106,7 +106,7 @@ export const ActivitiesTable = styled(ScrollableTable)`
       padding-left: 15px;
     }
     &:nth-child(2) {
-      width: 25%;
+      width: 27%;
       float: left;
     }
 
@@ -115,12 +115,12 @@ export const ActivitiesTable = styled(ScrollableTable)`
       float: left;
     }
     &:nth-child(4) {
-      text-align: center;
+      justify-content: center;
     }
     &:nth-child(5) {
-      text-align: center;
+      justify-content: center;
     }
-    width: 10%;
+    width: 9%;
     float: left;
   }
 `

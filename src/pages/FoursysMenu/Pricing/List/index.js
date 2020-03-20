@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Form } from '@unform/web'
 import { Link } from 'react-router-dom'
+
+import { MdModeEdit } from 'react-icons/md'
+
+import EditModal from '../Modals/EditProject'
 
 import Title from '../../../../components/Title'
 import Input from '../../../../components/Input'
@@ -22,6 +26,8 @@ const customStyles = {
 }
 
 export default function List() {
+  const [editing, setEditing] = useState(false)
+
   return (
     <Container>
       <Title>Precificação</Title>
@@ -50,6 +56,7 @@ export default function List() {
             <th>Proposta</th>
             <th>Status</th>
             <th>Prazo</th>
+            <th>Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -64,7 +71,12 @@ export default function List() {
             <td>Viviane de Oliveira</td>
             <td>P201910B9</td>
             <td>Pendente de Precificação</td>
-            <td>15/01/2020</td>
+            <td>
+              <Prompt>15/01/2020</Prompt>
+            </td>
+            <td>
+              <MdModeEdit onClick={() => setEditing(true)} />
+            </td>
           </tr>
           <tr>
             <td>6322</td>
@@ -78,18 +90,8 @@ export default function List() {
             <td>
               <Prompt>15/01/2020</Prompt>
             </td>
-          </tr>
-          <tr>
-            <td>6322</td>
             <td>
-              <Link to="/">CBON - IN3289406 Ajustar Expurgo banco</Link>
-            </td>
-            <td>Bradesco</td>
-            <td>Viviane de Oliveira</td>
-            <td>P201910B9</td>
-            <td>Pendente de Precificação</td>
-            <td>
-              <Prompt>15/01/2020</Prompt>
+              <MdModeEdit />
             </td>
           </tr>
           <tr>
@@ -104,18 +106,8 @@ export default function List() {
             <td>
               <Prompt>15/01/2020</Prompt>
             </td>
-          </tr>
-          <tr>
-            <td>6322</td>
             <td>
-              <Link to="/">CBON - IN3289406 Ajustar Expurgo banco</Link>
-            </td>
-            <td>Bradesco</td>
-            <td>Viviane de Oliveira</td>
-            <td>P201910B9</td>
-            <td>Pendente de Precificação</td>
-            <td>
-              <Prompt>15/01/2020</Prompt>
+              <MdModeEdit />
             </td>
           </tr>
           <tr>
@@ -130,18 +122,8 @@ export default function List() {
             <td>
               <Prompt>15/01/2020</Prompt>
             </td>
-          </tr>
-          <tr>
-            <td>6322</td>
             <td>
-              <Link to="/">CBON - IN3289406 Ajustar Expurgo banco</Link>
-            </td>
-            <td>Bradesco</td>
-            <td>Viviane de Oliveira</td>
-            <td>P201910B9</td>
-            <td>Pendente de Precificação</td>
-            <td>
-              <Prompt>15/01/2020</Prompt>
+              <MdModeEdit />
             </td>
           </tr>
           <tr>
@@ -156,18 +138,8 @@ export default function List() {
             <td>
               <Prompt>15/01/2020</Prompt>
             </td>
-          </tr>
-          <tr>
-            <td>6322</td>
             <td>
-              <Link to="/">CBON - IN3289406 Ajustar Expurgo banco</Link>
-            </td>
-            <td>Bradesco</td>
-            <td>Viviane de Oliveira</td>
-            <td>P201910B9</td>
-            <td>Pendente de Precificação</td>
-            <td>
-              <Prompt>15/01/2020</Prompt>
+              <MdModeEdit />
             </td>
           </tr>
           <tr>
@@ -181,6 +153,73 @@ export default function List() {
             <td>Pendente de Precificação</td>
             <td>
               <Prompt>15/01/2020</Prompt>
+            </td>
+            <td>
+              <MdModeEdit />
+            </td>
+          </tr>
+          <tr>
+            <td>6322</td>
+            <td>
+              <Link to="/">CBON - IN3289406 Ajustar Expurgo banco</Link>
+            </td>
+            <td>Bradesco</td>
+            <td>Viviane de Oliveira</td>
+            <td>P201910B9</td>
+            <td>Pendente de Precificação</td>
+            <td>
+              <Prompt>15/01/2020</Prompt>
+            </td>
+            <td>
+              <MdModeEdit />
+            </td>
+          </tr>
+          <tr>
+            <td>6322</td>
+            <td>
+              <Link to="/">CBON - IN3289406 Ajustar Expurgo banco</Link>
+            </td>
+            <td>Bradesco</td>
+            <td>Viviane de Oliveira</td>
+            <td>P201910B9</td>
+            <td>Pendente de Precificação</td>
+            <td>
+              <Prompt>15/01/2020</Prompt>
+            </td>
+            <td>
+              <MdModeEdit />
+            </td>
+          </tr>
+          <tr>
+            <td>6322</td>
+            <td>
+              <Link to="/">CBON - IN3289406 Ajustar Expurgo banco</Link>
+            </td>
+            <td>Bradesco</td>
+            <td>Viviane de Oliveira</td>
+            <td>P201910B9</td>
+            <td>Pendente de Precificação</td>
+            <td>
+              <Prompt>15/01/2020</Prompt>
+            </td>
+            <td>
+              <MdModeEdit />
+            </td>
+          </tr>
+          <tr>
+            <td>6322</td>
+            <td>
+              <Link to="/">CBON - IN3289406 Ajustar Expurgo banco</Link>
+            </td>
+            <td>Bradesco</td>
+            <td>Viviane de Oliveira</td>
+            <td>P201910B9</td>
+            <td>Pendente de Precificação</td>
+            <td>
+              <Prompt>15/01/2020</Prompt>
+            </td>
+            <td>
+              <MdModeEdit />
             </td>
           </tr>
         </tbody>
@@ -195,6 +234,13 @@ export default function List() {
         <span>13</span>
         <span>Proximo</span>
       </Pagination>
+
+      <EditModal
+        show={editing}
+        close={() => {
+          setEditing(false)
+        }}
+      />
     </Container>
   )
 }

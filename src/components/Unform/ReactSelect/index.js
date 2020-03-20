@@ -4,6 +4,34 @@ import PropTypes from 'prop-types'
 import { useField } from '@unform/core'
 import { Container } from './styles'
 
+const customStyles = {
+  control: base => ({
+    ...base,
+    height: 32,
+    minHeight: 32,
+    position: 'initial',
+  }),
+  multiValue: (styles, { data }) => {
+    const color = '#89BAB1'
+    return {
+      ...styles,
+      backgroundColor: color,
+    }
+  },
+  multiValueLabel: (styles, { data }) => ({
+    ...styles,
+    color: '#fff',
+  }),
+  multiValueRemove: (styles, { data }) => ({
+    ...styles,
+    color: '#fff',
+    ':hover': {
+      backgroundColor: data.color,
+      color: '#f1f1f1',
+    },
+  }),
+}
+
 export default function ReactSelect({
   name,
   label,
@@ -45,6 +73,7 @@ export default function ReactSelect({
         aria-label={fieldName}
         options={options}
         isMulti={multiple}
+        styles={customStyles}
         ref={ref}
         {...rest}
       />

@@ -40,6 +40,10 @@ export default createGlobalStyle`
     text-decoration: none;
   }
 
+  p{
+    margin-bottom: 5px;
+  }
+
   ul{
     list-style: none;
   }

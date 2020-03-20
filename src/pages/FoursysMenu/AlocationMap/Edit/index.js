@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 
 import { Form } from '@unform/web'
 import history from '../../../../services/history'
@@ -6,6 +6,7 @@ import history from '../../../../services/history'
 import {
   Container,
   TopInfo,
+  PeriodOpts,
   TotalHours,
   TableDiv,
   ResourceTable,
@@ -14,46 +15,73 @@ import {
 import Title from '../../../../components/Title'
 import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
+import DatePicker from '../../../../components/DatePicker'
 
-export default function Edit() {
+export default function Edit({ history, location }) {
+  const chosenOption = useMemo(() => {
+    return location.state.projectSelected || false
+  }, [location])
+
+  const [projectSelected, setProjectSelected] = useState(chosenOption)
+
   return (
     <Container>
-      <Title>Planejamento Projeto CBON - IN3289406 Ajustar Expurgo Banco</Title>
+      <Title>
+        {projectSelected
+          ? 'Planejamento Projeto CBON - IN3289406 Ajustar Expurgo Banco'
+          : 'Planejamento Recurso: Fulano Barbosa Pereira da Silva'}
+      </Title>
 
-      <TopInfo>
-        <div>
+      {projectSelected && (
+        <TopInfo>
           <div>
-            <span>Data Início Desenvolvimento:</span>
-            <span>12/01/2019</span>
+            <div>
+              <span>Data Início Desenvolvimento:</span>
+              <span>12/01/2019</span>
+            </div>
+            <div>
+              <span>Data Fim Desenvolvimento:</span>
+              <span>24/07/2019</span>
+            </div>
           </div>
-          <div>
-            <span>Data Fim Desenvolvimento:</span>
-            <span>24/07/2019</span>
-          </div>
-        </div>
 
-        <TotalHours>
+          <TotalHours>
+            <div>
+              <span>Horas Técnicas:</span>
+              <span>500:00</span>
+            </div>
+            <div>
+              <span>Horas Realizadas:</span>
+              <span>500:00</span>
+            </div>
+            <div>
+              <span>Horas Disponíveis:</span>
+              <span>500:00</span>
+            </div>
+          </TotalHours>
+        </TopInfo>
+      )}
+
+      {!projectSelected && (
+        <PeriodOpts>
           <div>
-            <span>Horas Técnicas:</span>
-            <span>500:00</span>
+            <p>Periodo de:</p>
+            <DatePicker />
           </div>
           <div>
-            <span>Horas Realizadas:</span>
-            <span>500:00</span>
+            <p>Periodo até:</p>
+            <DatePicker />
           </div>
-          <div>
-            <span>Horas Disponíveis:</span>
-            <span>500:00</span>
-          </div>
-        </TotalHours>
-      </TopInfo>
+          <Button darken>Consultar</Button>
+        </PeriodOpts>
+      )}
 
       <TableDiv>
         <Form>
           <ResourceTable>
             <thead>
               <tr>
-                <th rowSpan="2">Recurso</th>
+                <th rowSpan="2">{projectSelected ? 'Recurso' : 'Projeto'}</th>
                 <th>Jan/2019</th>
                 <th>Fev/2019</th>
                 <th>Mar/2019</th>

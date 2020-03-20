@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import Select from 'react-select'
-import Table from '../../../components/Table'
+import Table from '../../../../components/Table'
 
 export const Container = styled.div`
   .popover {
@@ -39,6 +39,16 @@ export const Container = styled.div`
   }
 `
 
+export const SelectsDiv = styled.div`
+  display: flex;
+  width: 100%;
+
+  > div {
+    margin-right: 15px;
+    width: 30%;
+  }
+`
+
 export const TopForm = styled.div`
   display: flex;
   align-content: center;
@@ -51,9 +61,6 @@ export const TopForm = styled.div`
   }
 
   > div {
-    width: 30%;
-    margin-right: 20px;
-
     &:last-child {
       width: 20%;
     }
@@ -136,6 +143,39 @@ export const ProjectsTable = styled(Table)`
   }
 `
 
+export const ResourceTable = styled(Table)`
+  margin-top: 10px;
+  width: 100%;
+
+  tbody td,
+  thead th {
+    &:nth-child(1) {
+      padding-left: 10px;
+      width: 24%;
+      text-align: left;
+    }
+    &:nth-child(2) {
+      width: 20%;
+      text-align: left;
+    }
+    &:nth-child(3) {
+      width: 24%;
+      text-align: left;
+    }
+    &:nth-child(4) {
+      width: 10%;
+      padding-right: 25px;
+    }
+    &:nth-child(5) {
+      width: 9%;
+      padding-right: 25px;
+    }
+
+    width: 10%;
+    text-align: center;
+  }
+`
+
 export const Pagination = styled.div`
   float: right;
   margin-top: 30px;
@@ -161,7 +201,9 @@ export const Pagination = styled.div`
     }
   }
 `
-export const Teste = styled.div``
+export const Teste = styled.div`
+  width: 100%;
+`
 
 export const DropDown = styled.div`
   display: flex;
