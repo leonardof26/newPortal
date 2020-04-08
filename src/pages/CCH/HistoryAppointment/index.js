@@ -7,10 +7,9 @@ import { format, parseISO } from 'date-fns'
 import { MdModeEdit } from 'react-icons/md'
 import { FaRegTrashAlt } from 'react-icons/fa'
 
-import pt from 'date-fns/locale/pt'
 import { Form } from '@unform/web'
 
-import DatePicker, { registerLocale } from 'react-datepicker'
+import DatePicker from '../../../components/DatePicker'
 import LoadingPage from '../../../components/LoadingPage'
 
 import {
@@ -46,6 +45,7 @@ export default function HistoryAppointment() {
   const [hoursInp, setHoursInp] = useState('')
   const [loading, setLoading] = useState(false)
   const [totalHour, setTotalHour] = useState('00:00')
+  const [dateValid, setDateValid] = useState(false)
 
   const resourcesOption = resourcesList.map(asset => {
     return { label: asset.nmProfissional, value: asset.cdProfissional }
@@ -56,13 +56,11 @@ export default function HistoryAppointment() {
   })
 
   const schema = Yup.object().shape({
-    name: Yup.object().required(),
+    name: Yup.string().required(),
     selectedProj: Yup.object().required(),
   })
 
   const formRef = useRef(null)
-
-  registerLocale('pt', pt)
 
   function isNumeric(hourTxt) {
     const re = /^[0-9\b]+$/
@@ -164,9 +162,16 @@ export default function HistoryAppointment() {
     setHourList(resp.data)
   }
 
+  async function getIsDateValid() {
+    const resp = await historyAppointment.getIsDateValid(period.toISOString())
+
+    setDateValid(!resp.data.flPermissao)
+  }
+
   async function handlePeriodChange() {
     setLoading(true)
     await getMonthHours()
+    await getIsDateValid()
 
     if (resource) {
       await getHours()
@@ -180,6 +185,7 @@ export default function HistoryAppointment() {
     await getMonthHours()
     await getNames()
     await getActivities()
+    await getIsDateValid()
     setLoading(false)
   }
 
@@ -207,7 +213,7 @@ export default function HistoryAppointment() {
       await schema.validate({ ...data, selectedProj }, { abortEarly: false })
 
       const payload = {
-        cdProfissional: data.name.value,
+        cdProfissional: data.name,
         cdProjeto: selectedProj.value,
         cdDivisao: projectList.find(
           proj => proj.cdProjeto === selectedProj.value
@@ -371,7 +377,9 @@ export default function HistoryAppointment() {
               error={!checkHours(hoursInp)}
             />
           </div>
-          <Button type="submit">Salvar</Button>
+          <Button type="submit" disabled={dateValid}>
+            Salvar
+          </Button>
         </EmployeeInfo>
       </Form>
 

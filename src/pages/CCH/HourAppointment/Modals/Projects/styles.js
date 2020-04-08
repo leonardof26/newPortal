@@ -22,6 +22,7 @@ export const ProjectsTable = styled(ScrollableTable)`
   button {
     background: center;
     border: none;
+    font-weight: 650;
   }
 
   tbody td,

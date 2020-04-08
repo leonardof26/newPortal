@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import PropTypes from 'prop-types'
-
+import ReactSelect, { OptionTypeBase, Props as SelectProps } from 'react-select'
 import { useField } from '@unform/core'
 import { Container } from './styles'
 
@@ -32,65 +31,42 @@ const customStyles = {
   }),
 }
 
-export default function ReactSelect({
-  name,
-  label,
-  options,
-  multiple,
-  ...rest
-}) {
-  const ref = useRef(null)
-  const { fieldName, registerField, error } = useField(name)
-
-  function parseSelectValue(selectRef) {
-    const selectValue = selectRef.state.value
-    if (!multiple) {
-      return selectValue ? selectValue.value : ''
-    }
-
-    return selectValue ? selectValue.map(option => option.id) : []
-  }
+const Select = ({ name, ...rest }) => {
+  const selectRef = useRef(null)
+  const { fieldName, defaultValue, registerField, error } = useField(name)
 
   useEffect(() => {
     registerField({
       name: fieldName,
-      ref: ref.current,
+      ref: selectRef.current,
       path: 'state.value',
-      parseValue: parseSelectValue,
-      clearValue: selectRef => {
-        selectRef.select.clearValue()
+      getValue: ref => {
+        if (rest.isMulti) {
+          if (!ref.state.value) {
+            return []
+          }
+
+          return ref.state.value.map(option => option.value)
+        }
+        if (!ref.state.value) {
+          return ''
+        }
+
+        return ref.state.value.value
       },
     })
-  }, [ref.current, fieldName]) // eslint-disable-line
+  }, [fieldName, registerField, rest.isMulti])
 
   return (
-    <>
-      {label && <label htmlFor={fieldName}>{label}</label>}
-
-      <Container
-        error={error}
-        name={fieldName}
-        aria-label={fieldName}
-        options={options}
-        isMulti={multiple}
-        styles={customStyles}
-        ref={ref}
-        {...rest}
-      />
-
-      {error && <span>{error}</span>}
-    </>
+    <Container
+      error={error}
+      // defaultValue={defaultValue}
+      ref={selectRef}
+      classNamePrefix="react-select"
+      styles={customStyles}
+      {...rest}
+    />
   )
 }
 
-ReactSelect.propTypes = {
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
-  multiple: PropTypes.bool,
-}
-
-ReactSelect.defaultProps = {
-  label: '',
-  multiple: false,
-}
+export default Select

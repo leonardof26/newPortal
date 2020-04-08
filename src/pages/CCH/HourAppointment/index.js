@@ -9,6 +9,7 @@ import { monthlyHour } from '../../../services/API/calls'
 
 import Refund from './Modals/Refund'
 import Projects from './Modals/Projects'
+import Activities from './Modals/Activities'
 
 import {
   Container,
@@ -34,7 +35,7 @@ export default function HourAppointment() {
   const [cchTable, setCchTable] = useImmer([])
   const [selectedDay, setSelectedDay] = useState()
   const [monthHours, setMonthHours] = useState('00')
-  // const [showActivities, setShowActivities] = useState(false)
+  const [showActivities, setShowActivities] = useState(false)
   const [showProjects, setShowProjects] = useState(false)
   const [showRefund, setShowRefund] = useState(false)
   // const [dayjustify, setDayjustify] = useState('')
@@ -345,6 +346,20 @@ export default function HourAppointment() {
         show={showProjects}
         close={() => setShowProjects(false)}
         dayjustify={new Date()}
+        openActivities={() => {
+          setShowProjects(false)
+          setShowActivities(true)
+        }}
+      />
+
+      <Activities
+        show={showActivities}
+        close={() => setShowActivities(false)}
+        dayjustify={new Date()}
+        goBack={() => {
+          setShowActivities(false)
+          setShowProjects(true)
+        }}
       />
     </Container>
   )

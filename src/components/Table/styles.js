@@ -15,19 +15,6 @@ export const Container = styled.table`
     text-align: right;
   }
 
-  svg {
-    font-size: 21px;
-    padding: 0 2px;
-    border: 1px solid #222239;
-    border-radius: 4px;
-
-    &:hover {
-      background: #222239;
-      color: #fff;
-      cursor: pointer;
-    }
-  }
-
   thead {
     background: #222239;
     color: #fff;
@@ -53,6 +40,19 @@ export const Container = styled.table`
     td {
       border-bottom: 1px solid #b3b8bd;
       height: 40px;
+
+      > svg {
+        font-size: 21px;
+        padding: 0 2px;
+        border: 1px solid #222239;
+        border-radius: 4px;
+
+        &:hover {
+          background: #222239;
+          color: #fff;
+          cursor: pointer;
+        }
+      }
     }
   }
 

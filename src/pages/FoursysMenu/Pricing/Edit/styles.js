@@ -11,12 +11,12 @@ export const Container = styled.div`
   table {
     margin-bottom: 0;
 
-    input {
+    > input {
       width: 70px;
       height: 27px;
     }
 
-    svg {
+    > svg {
       border: 0;
       :hover {
         cursor: pointer;
@@ -105,7 +105,7 @@ export const ResultsTable = styled(Table)`
 
 export const RevenueTable = styled(Table)`
   margin-top: 10px;
-  width: 60%;
+  width: 70%;
   background: #fff;
 
   tbody tr:last-child {
@@ -281,6 +281,7 @@ export const CostTable = styled(Table)`
 export const ExpensesTable = styled(Table)`
   background: #fff;
   margin-top: 5px;
+  width: min-content;
 
   tbody td,
   thead th {
@@ -295,6 +296,12 @@ export const ExpensesTable = styled(Table)`
     min-width: 100px;
     text-align: center;
   }
+
+  input {
+    width: 95%;
+    height: 27px;
+    font-size: 13px !important;
+  }
 `
 
 export const Footer = styled.div`
@@ -303,8 +310,8 @@ export const Footer = styled.div`
   padding: 20px 0;
   border-top: 1px solid #eee;
 
-  button:first-child {
-    margin-right: 10px;
+  button:nth-child(2) {
+    margin: 0 10px;
   }
 `
 
@@ -317,7 +324,7 @@ const rotate = keyframes`
   }
 `
 
-export const Teste = styled.button`
+export const SaveButton = styled.button`
   display: ${props => (props.botton ? 'none' : 'flex')};
   position: fixed;
   right: 5%;

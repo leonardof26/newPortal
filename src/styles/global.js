@@ -52,4 +52,9 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
+  input::-ms-clear {
+  width : 0;
+  height: 0;
+}
+
 `

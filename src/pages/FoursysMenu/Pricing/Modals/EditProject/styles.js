@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 import Modal from 'react-bootstrap/Modal'
 
+import DatePicker, { registerLocale } from 'react-datepicker'
+
 import { Form as Unform } from '@unform/web'
 
 import ReactSelect from '../../../../../components/Unform/ReactSelect'
@@ -19,7 +21,7 @@ export const Header = styled.div`
   }
 `
 
-export const Body = styled(Unform)`
+export const Body = styled.div`
   margin: 0 5%;
 
   > div {
@@ -41,9 +43,15 @@ export const Body = styled(Unform)`
       margin-top: 14px;
     }
 
-    &:nth-child(4) > div {
-      width: 66%;
-      margin-bottom: 14px;
+    &:last-child {
+      flex-direction: column;
+      align-content: flex-start;
+      align-items: flex-start;
+
+      > div {
+        width: 66%;
+        margin-bottom: 14px;
+      }
     }
 
     .optsInputs {

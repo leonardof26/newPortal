@@ -1,18 +1,17 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  > div {
+  label {
     position: relative;
-    width: 100%;
   }
 
-  > div > span {
+  label > span {
     position: absolute;
     top: 50%;
     left: 10px;
     transform: translateY(-50%);
     color: #b3b8bd;
-    z-index: 2;
+    z-index: 100;
     border-right: 1px solid #ced4da;
     padding-right: 10px;
   }
@@ -37,8 +36,7 @@ export const Container = styled.div`
     color: #495057;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid;
-    border-color: ${props => (props.error ? '#a94442' : '#ced4da')};
+    border: 1px solid #ced4da;
     border-radius: 0.25rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     font-size: 12px !important;
@@ -46,4 +44,18 @@ export const Container = styled.div`
     height: 32px;
     padding: 4px 45px;
   }
+
+  /* .icon {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+
+    width: 25px;
+    height: 32px;
+    border: 1px solid #b3b8bd;
+
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  } */
 `

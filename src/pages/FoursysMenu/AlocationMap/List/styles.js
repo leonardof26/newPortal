@@ -95,7 +95,7 @@ export const TableDiv = styled.div`
 
 export const ProjectsTable = styled(Table)`
   margin-top: 10px;
-  width: min-content;
+  width: 100%;
 
   svg {
     border: none;
@@ -107,34 +107,23 @@ export const ProjectsTable = styled(Table)`
     }
   }
 
-  thead th {
-    height: 20px;
-  }
-
   tbody td,
   thead tr:first-child th {
-    &:nth-child(1) {
-      min-width: 60px;
-      width: 5%;
-    }
     &:nth-child(2) {
-      min-width: 400px;
-      width: 25%;
+      width: 26.3%;
       text-align: left;
     }
     &:nth-child(3) {
-      min-width: 250px;
-      width: 13%;
+      width: 26.3%;
       text-align: left;
     }
 
     &:nth-child(4) {
-      min-width: 250px;
-      width: 13%;
+      width: 26.3%;
       text-align: left;
     }
 
-    min-width: 100px;
+    width: 7%;
     text-align: center;
   }
 

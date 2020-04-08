@@ -17,6 +17,7 @@ import Profiles from '../pages/Parametrization/Profiles'
 import MonthlyHour from '../pages/Parametrization/MonthlyHour'
 import Roles from '../pages/Parametrization/Roles'
 import Technology from '../pages/Parametrization/Technology'
+import AccessProfile from '../pages/Parametrization/AccessProfile'
 
 export default function Routes() {
   return (
@@ -24,22 +25,63 @@ export default function Routes() {
       <Route path="/" exact component={Main} />
       <Route path="/login" component={Login} />
 
-      <Route path="/cch/hourAppointment" component={HourAppointment} />
-      <Route path="/cch/historyAppointment" component={HistoryAppointment} />
+      <Route
+        path="/cch/hourAppointment"
+        component={HourAppointment}
+        isPrivate
+      />
+      <Route
+        path="/cch/historyAppointment"
+        component={HistoryAppointment}
+        isPrivate
+      />
 
-      <Route path="/menufoursys/alocation" exact component={AlocationList} />
+      <Route
+        path="/menufoursys/alocation"
+        exact
+        component={AlocationList}
+        isPrivate
+      />
       <Route
         path="/menufoursys/alocation/edit"
         exact
         component={AlocationEdit}
+        isPrivate
       />
-      <Route path="/menufoursys/pricing" exact component={PricingList} />
-      <Route path="/menufoursys/pricing/edit" exact component={PricingEdit} />
+      <Route
+        path="/menufoursys/pricing"
+        exact
+        component={PricingList}
+        isPrivate
+      />
+      <Route
+        path="/menufoursys/pricing/edit"
+        exact
+        component={PricingEdit}
+        isPrivate
+      />
 
-      <Route path="/parametrizacao/perfilvenda" component={Profiles} />
-      <Route path="/parametrizacao/monthlyhours" component={MonthlyHour} />
-      <Route path="/parametrizacao/roles" component={Roles} />
-      <Route path="/parametrizacao/technology" component={Technology} />
+      <Route
+        path="/parametrizacao/perfilvenda"
+        component={Profiles}
+        isPrivate
+      />
+      <Route
+        path="/parametrizacao/monthlyhours"
+        component={MonthlyHour}
+        isPrivate
+      />
+      <Route path="/parametrizacao/roles" component={Roles} isPrivate />
+      <Route
+        path="/parametrizacao/technology"
+        component={Technology}
+        isPrivate
+      />
+      <Route
+        path="/parametrizacao/accessprofile"
+        component={AccessProfile}
+        isPrivate
+      />
     </Switch>
   )
 }

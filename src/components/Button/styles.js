@@ -15,4 +15,15 @@ export const Container = styled.button`
     background: ${props =>
       props.darken ? darken(0.08, '#222239') : darken(0.08, '#fff')};
   }
+
+  &:disabled {
+    background: #d1d1d6;
+    color: #8e8e93;
+    border-color: #8e8e93;
+
+    &:hover {
+      background: #d1d1d6;
+      cursor: auto;
+    }
+  }
 `

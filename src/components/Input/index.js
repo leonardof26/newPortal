@@ -21,7 +21,7 @@ export default function Input({ name, label, err, ...rest }) {
       {/* <label htmlFor={fieldName}>{label}</label> */}
 
       <Container
-        error={error && err}
+        error={error}
         id={fieldName}
         ref={inputRef}
         defaultValue={defaultValue}

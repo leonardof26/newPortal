@@ -20,13 +20,10 @@ export const HourInfo = styled.div`
   > div {
     display: flex;
     flex-direction: column;
-  }
 
-  input {
-    height: 32px;
-    border-radius: 5px;
-    border: 1px solid #b3b8bd;
-    padding: 4px;
+    &:first-child {
+      width: 67%;
+    }
   }
 
   .hourMonth {

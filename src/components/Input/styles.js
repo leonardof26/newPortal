@@ -1,16 +1,15 @@
 import styled from 'styled-components'
 
-import { Input } from '@rocketseat/unform'
-
 export const Container = styled.input`
   height: 32px;
-  border-color: ${props => (props.error ? '#a94442' : '#b3b8bd')};
+  border: 1px solid;
+  border-color: ${props => (props.error ? '#a94442' : '#ced4da')};
 
   width: 100%;
   font-weight: 400;
   line-height: 1.5;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   padding: 4px;

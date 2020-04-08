@@ -60,6 +60,10 @@ const menus = [
             link: { type: 'link', url: '/parametrizacao/technology' },
             title: 'Tecnologias',
           },
+          {
+            link: { type: 'link', url: '/parametrizacao/accessprofile' },
+            title: 'Perfis de Acesso',
+          },
         ],
       },
     ],

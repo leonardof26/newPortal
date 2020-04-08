@@ -255,7 +255,7 @@ export default function Projects({ show, close, openActivities, dayjustify }) {
           </div>
         </TopInfo>
 
-        <Form>
+        <Form onSubmit={() => {}}>
           <ProjectsTable>
             <thead>
               <tr>
@@ -294,7 +294,7 @@ export default function Projects({ show, close, openActivities, dayjustify }) {
                     />
                   </td>
                   <td>
-                    <JustifyButton>
+                    <JustifyButton onClick={openActivities}>
                       <FaFileAlt />
                     </JustifyButton>
                   </td>

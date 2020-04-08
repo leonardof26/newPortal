@@ -57,7 +57,7 @@ export const ProjectsTable = styled(Table)`
       text-align: left;
     }
     &:nth-child(4) {
-      width: 15%;
+      width: 18%;
       text-align: left;
     }
     &:nth-child(5) {
@@ -69,11 +69,11 @@ export const ProjectsTable = styled(Table)`
       text-align: left;
     }
     &:nth-child(7) {
-      width: 9%;
+      width: 7%;
       text-align: center;
     }
     &:nth-child(8) {
-      width: 5%;
+      width: 4%;
       text-align: center;
     }
   }
@@ -81,8 +81,18 @@ export const ProjectsTable = styled(Table)`
 
 export const Prompt = styled.div`
   padding: 5px 0;
-  margin: 0 25px;
-  background: ${lighten(0.2, '#FB7575')};
+  background: ${props => {
+    switch (props.tag) {
+      case 'red':
+        return lighten(0.2, '#ff3a30')
+      case 'green':
+        return lighten(0.2, '#30d158')
+      case 'yellow':
+        return lighten(0.2, '#ffd60a')
+      default:
+        return 'unset'
+    }
+  }};
   border-radius: 4px;
 `
 

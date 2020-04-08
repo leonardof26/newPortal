@@ -4,6 +4,64 @@ import api from './index'
 const authBaseURL = 'Portal.AuthProvider'
 const apiBaseURL = 'Portal.API'
 
+export const projects = {
+  getTechs: proj => {
+    return api.get(`${apiBaseURL}/api/Tecnologia/Projeto/${proj}`)
+  },
+}
+
+export const pricing = {
+  getPrincingList: payload => {
+    const string = querystring.stringify(payload)
+
+    return api.get(
+      `${apiBaseURL}/api/Precificacao${string ? `?${string}` : ''}`
+    )
+  },
+  getPrincingStatus: () => {
+    return api.get(`${apiBaseURL}/api/Status/Precificacao`)
+  },
+  getProjectDetails: proj => {
+    return api.get(`${apiBaseURL}/api/Precificacao/Proposta/${proj}`)
+  },
+  getPrincingDetails: pric => {
+    return api.get(`${apiBaseURL}/api/Precificacao/${pric}`)
+  },
+  getRevenueData: pric => {
+    return api.get(`${apiBaseURL}/api/Precificacao/Receita/${pric}`)
+  },
+  getCostData: pric => {
+    return api.get(`${apiBaseURL}/api/Precificacao/Custo/${pric}`)
+  },
+  getExpensesData: pric => {
+    return api.get(`${apiBaseURL}/api/Precificacao/Despesa/${pric}`)
+  },
+  getMetrics: () => {
+    return api.get(`${apiBaseURL}/api/Metrica`)
+  },
+  getDescountLevels: () => {
+    return api.get(`${apiBaseURL}/api/NivelDesconto`)
+  },
+  savePrecDetails: payload => {
+    return api.post(`${apiBaseURL}/api/Precificacao`, payload)
+  },
+  saveProjDetails: payload => {
+    return api.post(`${apiBaseURL}/api/Precificacao/Proposta`, payload)
+  },
+  saveRevenueData: payload => {
+    return api.post(`${apiBaseURL}/api/Precificacao/Receita`, payload)
+  },
+  saveCostData: payload => {
+    return api.post(`${apiBaseURL}/api/Precificacao/Custo`, payload)
+  },
+  saveExpensesData: payload => {
+    return api.post(`${apiBaseURL}/api/Precificacao/Despesa`, payload)
+  },
+  sendToApproval: payload => {
+    return api.post(`${apiBaseURL}/api/Precificacao/Aprovacao`, payload)
+  },
+}
+
 export const activities = {
   getActivities: () => {
     return api.get(`${apiBaseURL}/api/Atividades`)
@@ -30,6 +88,9 @@ export const historyAppointment = {
     return api.get(
       `${apiBaseURL}/api/HorasHistorico/GetUltimaAtualizacao/${user}`
     )
+  },
+  getIsDateValid: date => {
+    return api.get(`${apiBaseURL}/api/PermissaoHorasHistorico/${date}`)
   },
   AddHours: payload => {
     return api.post(`${apiBaseURL}/api/HorasHistorico`, payload)

@@ -106,267 +106,206 @@ export default function AlocationMap() {
       </div>
 
       {projectSelected && (
-        <TableDiv>
-          <ProjectsTable ref={tableRef}>
-            <thead>
-              <tr>
-                <th rowSpan="2">Id</th>
-                <th rowSpan="2">Projeto</th>
-                <th rowSpan="2">Gerente Executivo</th>
-                <th rowSpan="2">Gerente</th>
-                <th rowSpan="2">Total Horas Alocadas</th>
-                <th colSpan="6">Semestre</th>
-                <th rowSpan="2">Ações</th>
-              </tr>
-              <tr>
-                <th>Jan/19</th>
-                <th>Fev/19</th>
-                <th>Mar/19</th>
-                <th>Abr/19</th>
-                <th>Mai/19</th>
-                <th>Jun/19</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>6322</td>
-                <td>
-                  <Link
-                    to={{
-                      pathname: '/menufoursys/alocation/edit',
-                      state: { projectSelected },
-                    }}
-                  >
-                    CBON - IN3289406 Ajustar Expurgo banco - 237
-                  </Link>
-                </td>
-                <td>Claudia Sato</td>
-                <td>Viviane de Oliveira</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
+        <ProjectsTable ref={tableRef}>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Projeto</th>
+              <th>Gerente Executivo</th>
+              <th>Gerente</th>
+              <th>Total Horas Alocadas</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>6322</td>
+              <td>
+                <Link
+                  to={{
+                    pathname: '/menufoursys/alocation/edit',
+                    state: { projectSelected },
+                  }}
+                >
+                  CBON - IN3289406 Ajustar Expurgo banco - 237
+                </Link>
+              </td>
+              <td>Claudia Sato</td>
+              <td>Viviane de Oliveira</td>
 
-                <td>
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="bottom"
-                    overlay={popover}
-                  >
-                    <MdMoreHoriz size={25} />
-                  </OverlayTrigger>
-                </td>
-              </tr>
-              <tr>
-                <td>6322</td>
-                <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
-                <td>Claudia Sato</td>
-                <td>Viviane de Oliveira</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
+              <td>500:00</td>
 
-                <td>
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="bottom"
-                    overlay={popover}
-                  >
-                    <MdMoreHoriz size={25} />
-                  </OverlayTrigger>
-                </td>
-              </tr>
-              <tr>
-                <td>6322</td>
-                <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
-                <td>Claudia Sato</td>
-                <td>Viviane de Oliveira</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
+              <td>
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  overlay={popover}
+                >
+                  <MdMoreHoriz size={25} />
+                </OverlayTrigger>
+              </td>
+            </tr>
+            <tr>
+              <td>6322</td>
+              <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
+              <td>Claudia Sato</td>
+              <td>Viviane de Oliveira</td>
 
-                <td>
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="bottom"
-                    overlay={popover}
-                  >
-                    <MdMoreHoriz size={25} />
-                  </OverlayTrigger>
-                </td>
-              </tr>
-              <tr>
-                <td>6322</td>
-                <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
-                <td>Claudia Sato</td>
-                <td>Viviane de Oliveira</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
+              <td>500:00</td>
 
-                <td>
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="bottom"
-                    overlay={popover}
-                  >
-                    <MdMoreHoriz size={25} />
-                  </OverlayTrigger>
-                </td>
-              </tr>
-              <tr>
-                <td>6322</td>
-                <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
-                <td>Claudia Sato</td>
-                <td>Viviane de Oliveira</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
+              <td>
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  overlay={popover}
+                >
+                  <MdMoreHoriz size={25} />
+                </OverlayTrigger>
+              </td>
+            </tr>
+            <tr>
+              <td>6322</td>
+              <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
+              <td>Claudia Sato</td>
+              <td>Viviane de Oliveira</td>
 
-                <td>
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="bottom"
-                    overlay={popover}
-                  >
-                    <MdMoreHoriz size={25} />
-                  </OverlayTrigger>
-                </td>
-              </tr>
-              <tr>
-                <td>6322</td>
-                <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
-                <td>Claudia Sato</td>
-                <td>Viviane de Oliveira</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
+              <td>500:00</td>
 
-                <td>
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="bottom"
-                    overlay={popover}
-                  >
-                    <MdMoreHoriz size={25} />
-                  </OverlayTrigger>
-                </td>
-              </tr>
-              <tr>
-                <td>6322</td>
-                <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
-                <td>Claudia Sato</td>
-                <td>Viviane de Oliveira</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
+              <td>
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  overlay={popover}
+                >
+                  <MdMoreHoriz size={25} />
+                </OverlayTrigger>
+              </td>
+            </tr>
+            <tr>
+              <td>6322</td>
+              <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
+              <td>Claudia Sato</td>
+              <td>Viviane de Oliveira</td>
 
-                <td>
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="bottom"
-                    overlay={popover}
-                  >
-                    <MdMoreHoriz size={25} />
-                  </OverlayTrigger>
-                </td>
-              </tr>
-              <tr>
-                <td>6322</td>
-                <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
-                <td>Claudia Sato</td>
-                <td>Viviane de Oliveira</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
+              <td>500:00</td>
 
-                <td>
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="bottom"
-                    overlay={popover}
-                  >
-                    <MdMoreHoriz size={25} />
-                  </OverlayTrigger>
-                </td>
-              </tr>
-              <tr>
-                <td>6322</td>
-                <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
-                <td>Claudia Sato</td>
-                <td>Viviane de Oliveira</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
+              <td>
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  overlay={popover}
+                >
+                  <MdMoreHoriz size={25} />
+                </OverlayTrigger>
+              </td>
+            </tr>
+            <tr>
+              <td>6322</td>
+              <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
+              <td>Claudia Sato</td>
+              <td>Viviane de Oliveira</td>
 
-                <td>
-                  <Teste>
-                    <MdMoreHoriz size={25} />
-                  </Teste>
-                </td>
-              </tr>
-              <tr>
-                <td>6322</td>
-                <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
-                <td>Claudia Sato</td>
-                <td>Viviane de Oliveira</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
-                <td>500:00</td>
+              <td>500:00</td>
 
-                <td>
-                  <OverlayTrigger
-                    trigger="click"
-                    placement="bottom"
-                    overlay={popover}
-                    container={tableRef.current}
-                  >
-                    <MdMoreHoriz size={25} />
-                  </OverlayTrigger>
-                </td>
-              </tr>
-            </tbody>
-          </ProjectsTable>
-        </TableDiv>
+              <td>
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  overlay={popover}
+                >
+                  <MdMoreHoriz size={25} />
+                </OverlayTrigger>
+              </td>
+            </tr>
+            <tr>
+              <td>6322</td>
+              <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
+              <td>Claudia Sato</td>
+              <td>Viviane de Oliveira</td>
+
+              <td>500:00</td>
+
+              <td>
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  overlay={popover}
+                >
+                  <MdMoreHoriz size={25} />
+                </OverlayTrigger>
+              </td>
+            </tr>
+            <tr>
+              <td>6322</td>
+              <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
+              <td>Claudia Sato</td>
+              <td>Viviane de Oliveira</td>
+
+              <td>500:00</td>
+
+              <td>
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  overlay={popover}
+                >
+                  <MdMoreHoriz size={25} />
+                </OverlayTrigger>
+              </td>
+            </tr>
+            <tr>
+              <td>6322</td>
+              <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
+              <td>Claudia Sato</td>
+              <td>Viviane de Oliveira</td>
+
+              <td>500:00</td>
+
+              <td>
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  overlay={popover}
+                >
+                  <MdMoreHoriz size={25} />
+                </OverlayTrigger>
+              </td>
+            </tr>
+            <tr>
+              <td>6322</td>
+              <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
+              <td>Claudia Sato</td>
+              <td>Viviane de Oliveira</td>
+
+              <td>500:00</td>
+
+              <td>
+                <Teste>
+                  <MdMoreHoriz size={25} />
+                </Teste>
+              </td>
+            </tr>
+            <tr>
+              <td>6322</td>
+              <td>CBON - IN3289406 Ajustar Expurgo banco - 237</td>
+              <td>Claudia Sato</td>
+              <td>Viviane de Oliveira</td>
+
+              <td>500:00</td>
+
+              <td>
+                <OverlayTrigger
+                  trigger="click"
+                  placement="bottom"
+                  overlay={popover}
+                  container={tableRef.current}
+                >
+                  <MdMoreHoriz size={25} />
+                </OverlayTrigger>
+              </td>
+            </tr>
+          </tbody>
+        </ProjectsTable>
       )}
 
       {!projectSelected && (

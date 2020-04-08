@@ -36,11 +36,11 @@ export default function Edit({ history, location }) {
         <TopInfo>
           <div>
             <div>
-              <span>Data Início Desenvolvimento:</span>
+              <span>Data Início Prevista:</span>
               <span>12/01/2019</span>
             </div>
             <div>
-              <span>Data Fim Desenvolvimento:</span>
+              <span>Data Fim Prevista:</span>
               <span>24/07/2019</span>
             </div>
           </div>
